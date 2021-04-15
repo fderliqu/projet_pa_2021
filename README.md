@@ -13,7 +13,7 @@ cours de programmation avancée : structures de données complexes,
 lecture / écriture de fichiers, compilation séparée et automatique, utilisation
 de gestionnaire de version...
 
-Pour cela, le travail demandé est de réaliser une application qui permet d'analyser 58592 vols aux États Unis en 2014. Votre travail est de charger ces fichiers pour effectuer un certain nombre de requêtes (lister des vols selon plusieurs critères, lister l'aeroligne avec plus de retards, trouver un itinéraire, ...)
+Pour cela, le travail demandé est de réaliser une application qui permet d'analyser 58592 vols aux États Unis en 2014. Votre travail est de charger ces fichiers pour effectuer un certain nombre de requêtes (lister des vols selon plusieurs critères, lister l'aéroligne avec plus de retards, trouver un itinéraire, ...)
 
 ## Contexte
 
@@ -52,7 +52,7 @@ US,US Airways Inc.
 
 ## Cahier des charges
 
-Il vous est demandé de réaliser un programme qui charge les fichiers de données `CSV` (ils sont disponibles dans le répertoire `data`) et qui permet de les interroger facilement. 
+Il vous est demandé de réaliser un programme qui charge les fichiers de données `CSV` (ils sont disponibles dans le répertoire `data`) et qui permet de les interroger facilement.
 
 Le volume de données est relativement important, par conséquent un soin particulier devra être apporté aux structures de données utilisées et à la rapidité d'exécution de votre programme. Les choix algorithmiques devront obligatoirement être expliqués et justifiés dans votre rapport.
 
@@ -69,11 +69,11 @@ Les commandes seront les suivantes:
 **TODO: À TRAVAILLER  LES REQUETTES !!!**
 
 
-- `show-airports <airline_id>`  : liste tous les aéroports depuis lesquels la compagnie aérienne `<airline_id>` 
-- `show-airlines <port_id>`: liste l'ensemble des compagnie aeriénnes depuis l'aéroport passé en paramètre
+- `show-airports <airline_id>`  : liste tous les aéroports depuis lesquels la compagnie aérienne `<airline_id>`
+- `show-airlines <port_id>`: liste l'ensemble des compagnie aériennes depuis l'aéroport passé en paramètre
 - `show-flights <port_id> <date> [<time>] [limit=xx]` : lister les vols qui partent de l'aéroport à la date, avec optionnellement une heure de début, et limité à xx vols
-- `latest-flights`     : donne les 5 vols qui ont subis les plus longs retards à l'arrivée 
-- `latest-airlines`    : donne les 5 compagnies aériennes qui ont, en moyenne, le plus de retards 
+- `latest-flights`     : donne les 5 vols qui ont subis les plus longs retards à l'arrivée
+- `latest-airlines`    : donne les 5 compagnies aériennes qui ont, en moyenne, le plus de retards
 opère des vols
 - `airlines <port_id>` : recherche compagnies aériens qui ont des vols qui départent l'aeroport `IATA_AIRPORT`
 - `changed-flights <date>` : les vols annulés ou déviés à la date <date> (format M-D)
@@ -95,7 +95,82 @@ avec le fichier `requetes.txt` qui contient par exemple:
 
 ## Précisions sur les requêtes
 
-TODO: Donner une structure pour les requêtes qui permet de les noter presque automatiquement!
+### `show-airports <airline_id>`
+
+> Exemple et affichage attendu
+
+~~~
+> show-airports HA
+HNL,Honolulu International Airport,Honolulu,HI
+KOA,Kona International Airport at Keahole,Kailua/Kona,HI
+LAS,McCarran International Airport,Las Vegas,NV
+LAX,Los Angeles International Airport,Los Angeles,CA
+LIH,Lihue Airport,Lihue,HI
+OGG,Kahului Airport,Kahului,HI
+PHX,Phoenix Sky Harbor International Airport,Phoenix,AZ
+SFO,San Francisco International Airport,San Francisco,CA
+~~~
+
+### `show-airlines <port_id>`
+
+> Exemple et affichage attendu
+
+~~~
+> show-airlines BOS
+AA,American Airlines Inc.
+B6,JetBlue Airways
+DL,Delta Air Lines Inc.
+NK,Spirit Air Lines
+OO,Skywest Airlines Inc.
+UA,United Air Lines Inc.
+US,US Airways Inc.
+VX,Virgin America
+WN,Southwest Airlines Co.
+~~~
+
+### `show-flights <port_id> <date> [<time>] [limit=xx]`
+
+> Exemple et affichage attendu
+
+~~~
+> show-flights ATL 26/2
+2,26,4,DL,ATL,TPA,1920,24.0,67.0,406,2045,30.0,0,0
+2,26,4,DL,ATL,SRQ,1040,13.0,71.0,444,1213,18.0,0,0
+2,26,4,DL,ATL,DCA,1820,-2.0,64.0,547,2004,-26.0,0,0
+2,26,4,DL,ATL,MSP,1057,12.0,121.0,907,1235,3.0,0,0
+2,26,4,WN,ATL,LGA,645,-5.0,90.0,762,855,-29.0,0,0
+2,26,4,DL,ATL,CAK,2104,-2.0,64.0,528,2250,-15.0,0,0
+2,26,4,DL,ATL,LAX,1518,13.0,271.0,1947,1735,-4.0,0,0
+2,26,4,DL,ATL,TLH,1939,16.0,42.0,223,2051,16.0,0,0
+2,26,4,DL,ATL,MCI,1205,-5.0,114.0,692,1320,1.0,0,0
+2,26,4,WN,ATL,BWI,1620,-5.0,71.0,577,1805,-21.0,0,0
+2,26,4,DL,ATL,TUL,1045,-2.0,106.0,674,1200,-17.0,0,0
+2,26,4,DL,ATL,HOU,1445,-5.0,110.0,696,1615,-26.0,0,0
+2,26,4,DL,ATL,MIA,1735,15.0,92.0,594,1933,21.0,0,0
+2,26,4,DL,ATL,BOS,905,23.0,108.0,946,1135,2.0,0,0
+2,26,4,DL,ATL,GPT,1615,23.0,60.0,352,1644,8.0,0,0
+2,26,4,DL,ATL,MCO,1155,189.0,68.0,404,1320,190.0,0,0
+2,26,4,DL,ATL,PBI,822,65.0,81.0,545,1009,57.0,0,0
+2,26,4,DL,ATL,ELP,1930,5.0,222.0,1282,2109,35.0,0,0
+2,26,4,NK,ATL,IAH,1545,58.0,125.0,689,1708,61.0,0,0
+2,26,4,DL,ATL,DFW,830,,,731,1003,,0,1
+2,26,4,DL,ATL,TYS,1241,6.0,31.0,152,1331,2.0,0,0
+2,26,4,DL,ATL,MLB,1526,10.0,70.0,442,1657,26.0,0,0
+2,26,4,DL,ATL,RDU,1500,-2.0,48.0,356,1623,-14.0,0,0
+2,26,4,DL,ATL,GRR,2040,1.0,87.0,640,2240,-11.0,0,0
+~~~
+
+### `latest-flights`
+> Exemple et affichage attendu
+
+~~~
+> latest-flights
+9,24,4,EV,ORD,OMA,2229,-12.0,63.0,416,2359,-22.0,0,0
+9,26,6,AS,SFO,SLC,2118,-3.0,76.0,599,2359,-4.0,0,0
+9,29,2,F9,PHX,IAH,1925,-11.0,122.0,1009,2359,-13.0,0,0
+9,4,5,DL,ATL,BWI,2205,0.0,94.0,577,2359,12.0,0,0
+9,7,1,OO,LAX,SAN,2305,8.0,27.0,109,2359,-2.0,0,0
+~~~
 
 
 ## Déliverables
