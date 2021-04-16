@@ -69,13 +69,12 @@ Les commandes seront les suivantes:
 **TODO: À TRAVAILLER  LES REQUETTES !!!**
 
 
-- `show-airports <airline_id>`  : liste tous les aéroports depuis lesquels la compagnie aérienne `<airline_id>`
+- `show-airports <airline_id>`  : liste tous les aéroports depuis lesquels la compagnie aérienne `<airline_id>` opère des vols
 - `show-airlines <port_id>`: liste l'ensemble des compagnie aériennes depuis l'aéroport passé en paramètre
 - `show-flights <port_id> <date> [<time>] [limit=xx]` : lister les vols qui partent de l'aéroport à la date, avec optionnellement une heure de début, et limité à xx vols
 - `latest-flights`     : donne les 5 vols qui ont subis les plus longs retards à l'arrivée
 - `latest-airlines`    : donne les 5 compagnies aériennes qui ont, en moyenne, le plus de retards
-opère des vols
-- `airlines <port_id>` : recherche compagnies aériens qui ont des vols qui départent l'aeroport `IATA_AIRPORT`
+- `airlines <port_id>` : recherche compagnies aériens qui ont des vols qui partent de l'aéroport `IATA_AIRPORT`
 - `changed-flights <date>` : les vols annulés ou déviés à la date <date> (format M-D)
 - CALCULATE_DURATION OF FLIGHTS
 - ¡¡¡FIND AN ITINERARY!!!
@@ -133,7 +132,7 @@ WN,Southwest Airlines Co.
 > Exemple et affichage attendu
 
 ~~~
-> show-flights ATL 26/2
+> show-flights ATL 2-26
 2,26,4,DL,ATL,TPA,1920,24.0,67.0,406,2045,30.0,0,0
 2,26,4,DL,ATL,SRQ,1040,13.0,71.0,444,1213,18.0,0,0
 2,26,4,DL,ATL,DCA,1820,-2.0,64.0,547,2004,-26.0,0,0
@@ -164,7 +163,7 @@ WN,Southwest Airlines Co.
 > Exemple et affichage attendu
 
 ~~~
-> latest-flights
+> latest-airlines
 9,24,4,EV,ORD,OMA,2229,-12.0,63.0,416,2359,-22.0,0,0
 9,26,6,AS,SFO,SLC,2118,-3.0,76.0,599,2359,-4.0,0,0
 9,29,2,F9,PHX,IAH,1925,-11.0,122.0,1009,2359,-13.0,0,0
@@ -172,10 +171,55 @@ WN,Southwest Airlines Co.
 9,7,1,OO,LAX,SAN,2305,8.0,27.0,109,2359,-2.0,0,0
 ~~~
 
+### `latest-airlines <port_id>`
+
+> Exemple et affichage attendu
+
+~~~
+> latest-airlines
+AA,American Airlines Inc.
+DL,Delta Air Lines Inc.
+UA,United Air Lines Inc.
+VX,Virgin America
+WN,Southwest Airlines Co.
+~~~
+
+### `airlines <port_id>`
+
+> Exemple et affichage attendu
+
+~~~
+> `airlines SFO`
+AA,American Airlines Inc.
+AS,Alaska Airlines Inc.
+B6,JetBlue Airways
+DL,Delta Air Lines Inc.
+F9,Frontier Airlines Inc.
+HA,Hawaiian Airlines Inc.
+OO,Skywest Airlines Inc.
+UA,United Air Lines Inc.
+US,US Airways Inc.
+VX,Virgin America
+WN,Southwest Airlines Co.
+~~~
+
+### `changed-flights <date>`
+
+> Exemple et affichage attendu
+
+~~~
+> changed-flights 12-29
+12,29,2,EV,ORD,DAY,1040,,,240,1254,,0,1
+12,29,2,AA,ORD,MCO,921,,,1005,1306,,0,1
+12,29,2,AA,LAX,ORD,600,,,1744,1213,,0,1
+12,29,2,UA,IAH,SEA,2133,,,1874,29,,0,1
+12,29,2,MQ,ORD,GRB,837,,,173,935,,0,1
+12,29,2,EV,ORD,DSM,1552,,,299,1712,,0,1
+~~~
 
 ## Déliverables
 
-**La date de fin de projet est le xx mai 2021 23:59 CEST. Tout retard entraînera des pénalités.**
+**La date de fin de projet est le dimanche 30 mai 2021 23:59 CEST. Tout retard entraînera des pénalités.**
 
 Vous n'avez rien à imprimer, ni des documents à envoyer par e-mail. Il faudra donner l'accès du dépôt à votre correcteur et celui-ci corrigera à partir de la dernière version du dépôt ou de la branche `release` (si elle existe) avant la date limite. Les `push` qui suivraient la date limite ne seront pas considérés.
 
