@@ -76,9 +76,9 @@ Les commandes seront les suivantes:
 - `latest-airlines`    : donne les 5 compagnies aériennes qui ont, en moyenne, le plus de retards
 - `airlines <port_id>` : recherche compagnies aériens qui ont des vols qui partent de l'aéroport `IATA_AIRPORT`
 - `changed-flights <date>` : les vols annulés ou déviés à la date <date> (format M-D)
-- CALCULATE_DURATION OF FLIGHTS
-- ¡¡¡FIND AN ITINERARY!!!
-- `9`       : quit
+- `avg-flight-duration <port_id> <port_id>`: calcule le temps de vol moyen entre deux aéroports
+- `find-itinerary <port_id> <port_id> <date>`: trouve un itinéraire entre deux aéroports à une date donnée (il peut y avoir des escales)
+- `quit`       : quit
 
 Ainsi si votre exécutable s'appelle `projet_pa` il doit être possible de l'utiliser de la manière suivante:
 
@@ -215,6 +215,25 @@ WN,Southwest Airlines Co.
 12,29,2,UA,IAH,SEA,2133,,,1874,29,,0,1
 12,29,2,MQ,ORD,GRB,837,,,173,935,,0,1
 12,29,2,EV,ORD,DSM,1552,,,299,1712,,0,1
+~~~
+
+### `avg-flight-duration <port_id> <port_id>`
+
+> Exemple et affichage attendu
+
+~~~
+> avg-flight-duration LAX SFO
+average: 54.9 minutes (416 flights)
+~~~
+
+### `find-itinerary <port_id> <port_id> <date>`
+
+> Exemple et affichage attendu
+
+~~~
+> find-itinerary SFO CHA 6-15
+6,15,1,WN,SFO,ATL,700,-5.0,250.0,2139,1450,-22.0,0,0
+6,15,1,EV,ATL,CHA,1835,7.0,25.0,106,1927,-4.0,0,0
 ~~~
 
 ## Déliverables
