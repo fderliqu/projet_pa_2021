@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-Struct airports{ 
+struct airports{ 
 	char IATA_CODE;
 	char AIRPORT;
 	char CITY;
@@ -13,20 +13,20 @@ Struct airports{
 	struct compagnie *pt_comp;
 }
 
-Struct IATA_AIRLINE
+struct IATA_AIRLINE
 {
 	char IATA_CODE;
 	char AIRLINE;
 
 }
 
-Struct compagnie
+struct compagnie
 {
 	char AIRLINE;
-	struct vol* pt_vol;
+	struct vol *pt_vol;
 }
 
-Struct vol
+struct vol
 {
 
 char MONTH;
