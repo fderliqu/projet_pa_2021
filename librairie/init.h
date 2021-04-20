@@ -18,7 +18,7 @@ struct IATA_AIRLINE
 {
 	char IATA_CODE;
 	char AIRLINE;
-
+	struct IATA_AIRLINE* iata_suiv;
 }
 
 struct compagnie
