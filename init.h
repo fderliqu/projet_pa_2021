@@ -11,6 +11,7 @@ struct airports{
 	char LATITUDE;
 	char LONGITUDE;
 	struct compagnie *pt_comp;
+	struct airports* airports_suiv;
 }
 
 struct IATA_AIRLINE
@@ -24,6 +25,7 @@ struct compagnie
 {
 	char AIRLINE;
 	struct vol *pt_vol;
+	struct compagnie* compagnie_suiv;
 }
 
 struct vol
@@ -42,5 +44,6 @@ char SCHED_ARR;
 char ARR_DELAY;
 char DIVERTED;
 char CANCELLED;
+struct vol* vol_suiv;
 
 }
