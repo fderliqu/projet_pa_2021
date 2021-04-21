@@ -72,6 +72,8 @@ Les commandes seront les suivantes:
 - `show-flights <port_id> <date> [<time>] [limit=xx]` : lister les vols qui partent de l'aéroport à la date, avec optionnellement une heure de début, et limité à xx vols
 - `most-delayed-flights`     : donne les 5 vols qui ont subis les plus longs retards à l'arrivée
 - `most-delayed-airlines`    : donne les 5 compagnies aériennes qui ont, en moyenne, le plus de retards
+- `delayed-airline <airline_id>`    : donne le retard moyen de la compagnie aérienne passée en paramètre
+- `most-delayed-airlines-by-airports <airport_id>`    : donne les 3 compagnies aériennes avec le plus de delay d'arrivé
 - `airlines <port_id>` : recherche compagnies aériens qui ont des vols qui partent de l'aéroport `IATA_AIRPORT`
 - `changed-flights <date>` : les vols annulés ou déviés à la date <date> (format M-D)
 - `avg-flight-duration <port_id> <port_id>`: calcule le temps de vol moyen entre deux aéroports
@@ -183,7 +185,7 @@ WN,Southwest Airlines Co.
 9,7,1,OO,LAX,SAN,2305,8.0,27.0,109,2359,-2.0,0,0
 ~~~
 
-### `most-delayed-airlines <port_id>`
+### `most-delayed-airlines`
 
 > Exemple et affichage attendu
 
@@ -195,6 +197,30 @@ UA,United Air Lines Inc.
 VX,Virgin America
 WN,Southwest Airlines Co.
 ~~~
+
+### `delayed-airline <airline_id>`
+
+> Exemple et affichage attendu
+
+~~~
+> delayed-airline  AA
+AA,American Airlines Inc.,180
+~~~
+
+
+### `most-delayed-airlines-by-airports <airport_id>`
+
+> Exemple et affichage attendu
+
+~~~
+> most-delayed-airlines-by-airports  LAX
+WN,Southwest Airlines Co.,30
+NK,Spirit Air Lines,18
+OO,Skywest Airlines Inc.,10
+~~~
+
+
+
 
 ### `airlines <port_id>`
 
