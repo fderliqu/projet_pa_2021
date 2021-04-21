@@ -73,7 +73,7 @@ Les commandes seront les suivantes:
 - `most-delayed-flights`     : donne les 5 vols qui ont subis les plus longs retards à l'arrivée
 - `most-delayed-airlines`    : donne les 5 compagnies aériennes qui ont, en moyenne, le plus de retards
 - `delayed-airline <airline_id>`    : donne le retard moyen de la compagnie aérienne passée en paramètre
-- `most-delayed-airlines-by-airports <airport_id>`    : donne les 3 compagnies aériennes avec le plus de delay d'arrivé
+- `most-delayed-airlines-at-airport <airport_id>`    : donne les 3 compagnies aériennes avec le plus de retard d'arrivé à l'aéroport passée en paramètre
 - `changed-flights <date>` : les vols annulés ou déviés à la date <date> (format M-D)
 - `avg-flight-duration <port_id> <port_id>`: calcule le temps de vol moyen entre deux aéroports
 - `find-itinerary <port_id> <port_id> <date> [<time>] [limit=<xx>]`: trouve un ou plusieurs itinéraires entre deux aéroports à une date donnée (l'heure est optionnel, requête peut être limité à `xx` propositions, il peut y avoir des escales)
@@ -81,7 +81,8 @@ Les commandes seront les suivantes:
 - `quit`       : quit
 
 
-Pour information, les paramètres entre crochets [param] sont optionnels, et les paramètres entre `< >` indiquent une valeur à renseigner.
+Pour information, les paramètres entre crochets `[ ]` sont optionnels et les paramètres entre `< >` indiquent une valeur à renseigner.
+Les dates sont au format `M-J` et l'heure `HHMM`
 Ainsi si votre exécutable s'appelle `projet_pa` il doit être possible de l'utiliser de la manière suivante:
 
 ~~~
@@ -100,9 +101,8 @@ find-itinerary PHX SAN 12-15
 most-delayed-flights
 most-delayed-airlines
 changed-flights 5-15
-
-
-**TODO: compléter requêtes, par exemple "multi-city itinerary with stops" !!!**
+find-itinerary DEN MCI 2-15 1030 limit=4
+find-itinerary SAN JFK 6-15 1030 IAD 6-19 1215 SLC 6-21 SAN 6-25
 ~~~
 
 ## Précisions sur les requêtes
