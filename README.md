@@ -322,5 +322,11 @@ Voici les commandes :
 git remote add depot_sujet https://gitlab.univ-lille.fr/walter.rudametkin/projet_se3_2021.git
 git pull depot_sujet master
 ```
+En cas de conflit, vous devez les gérer manuellement. Si vous voulez annuler une merge, vous pouvez utiliser `git merge --abort` pour revenir à l’état juste avant le `git pull`.
 
 En cas d’erreur, n’hésitez pas à consulter la commande `git remote -v` et `git remote remove <dépôt>` qui permettent d’afficher les dépôts distants et supprimer un dépôt distant, respectivement.
+
+Une fois que vous avez intégré les changements, il faudra les partager sur votre dépôt distant avec
+```bash
+git push
+```
