@@ -311,17 +311,16 @@ L’évaluation de ce projet sera faite en utilisant de manière intensive les o
 Pour etre plus facilement lisible, vos commits devront suivre une convention de nommage. La convention utilisée par AngularJS est devenue très populaire. Elle est décrite à l’adresse suivante [Commit Message Conventions](https://gist.github.com/stephenparish/9941e89d80e2bc58a153).
 
 
+## Intégrer les changements du sujet dans votre dépôt suite à un fork
 
+Si vous avez crée votre dépôt en utilisant la fonctionalité de fork, vous pouvez continuer à intégrer directement les mises-à-jour. Pour ce faire, vous devez :
+1. Ajouter le dépôt comme un nouveau serveur distant différent à `origin`
+2. Recupérer les changements en indicant d’utiliser ce dépôt et la branche master
 
+Voici les commandes :
+```bash
+git remote add depot_sujet https://gitlab.univ-lille.fr/walter.rudametkin/projet_se3_2021.git
+git pull depot_sujet master
+```
 
-
-
-
-
-
-
-
-
-
-
-
+En cas d’erreur, n’hésitez pas à consulter la commande `git remote -v` et `git remote remove <dépôt>` qui permettent d’afficher les dépôts distants et supprimer un dépôt distant, respectivement.
