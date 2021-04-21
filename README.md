@@ -140,6 +140,7 @@ VX,Virgin America
 WN,Southwest Airlines Co.
 ~~~
 
+
 ### `show-flights <port_id> <date> [<time>] [limit=<xx>]`
 
 > Exemple et affichage attendu
@@ -218,27 +219,6 @@ NK,Spirit Air Lines,18
 OO,Skywest Airlines Inc.,10
 ~~~
 
-
-
-
-### `airlines <port_id>`
-
-> Exemple et affichage attendu
-
-~~~
-> `airlines SFO`
-AA,American Airlines Inc.
-AS,Alaska Airlines Inc.
-B6,JetBlue Airways
-DL,Delta Air Lines Inc.
-F9,Frontier Airlines Inc.
-HA,Hawaiian Airlines Inc.
-OO,Skywest Airlines Inc.
-UA,United Air Lines Inc.
-US,US Airways Inc.
-VX,Virgin America
-WN,Southwest Airlines Co.
-~~~
 
 ### `changed-flights <date>`
 
