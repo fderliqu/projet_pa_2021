@@ -11,6 +11,7 @@
 #define max_Hcomp 52
 #define max_Hdate 365
 
+// Table airport
 
 struct airport {
 	char IATA_CODE[SIZE_acronym];
@@ -28,9 +29,10 @@ struct cellule_airport {
 	struct airport* airport_suiv;
 };
 
-
 struct cellule_airport Htable_airport[max_Hairport];
 
+
+//IATA_AIRLINE
 
 
 struct IATA_AIRLINE {
@@ -39,7 +41,7 @@ struct IATA_AIRLINE {
 	struct IATA_AIRLINE* iata_suiv;
 };
 
-
+//Table compagnie
 
 struct compagnie {
 	char IATA_CODE[SIZE_airline_acro];// nous avons choisie de garder la compagnie ici et pas de poitneur car trois octet vs 8
@@ -48,6 +50,10 @@ struct compagnie {
 };
 
 struct compagnie Htable_compagnie[max_Hcomp];
+
+
+
+//Table vol
 
 
 struct vol {
