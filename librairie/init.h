@@ -26,7 +26,7 @@ struct airport {
 struct cellule_airport {
 	struct airport airport;
 	struct compagnie* pt_comp;
-	struct airport* airport_suiv;
+	struct cellule_airport* airport_suiv;
 };
 
 struct cellule_airport Htable_airport[max_Hairport];
@@ -77,7 +77,7 @@ struct vol {
 struct cellule_vol
 {
 	struct vol vol;
-	struct vol *vol_suiv;
+	struct cellule_vol *vol_suiv;
 };
 
 struct vol Htable_vol[max_Hdate];
