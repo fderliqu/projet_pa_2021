@@ -67,20 +67,22 @@ Pour permettre d'évaluer automatiquement la performance de votre programme et p
 Les commandes seront les suivantes:
 
 
-- `show-airports <airline_id>`  : liste tous les aéroports depuis lesquels la compagnie aérienne `<airline_id>` opère des vols
-- `show-airlines <port_id>`: liste l'ensemble des compagnie aériennes depuis l'aéroport passé en paramètre
-- `show-flights <port_id> <date> [<time>] [limit=xx]` : lister les vols qui partent de l'aéroport à la date, avec optionnellement une heure de début, et limité à xx vols
+- `show-airports <airline_id>`  : affiche tous les aéroports depuis lesquels la compagnie aérienne `<airline_id>` opère des vols
+- `show-airlines <port_id>`: affiche les compagnies aériens qui ont des vols qui partent de l'aéroport `<port_id>`
+- `show-flights <port_id> <date> [<time>] [limit=<xx>]` : affiche les vols qui partent de l'aéroport à la date, avec optionnellement une heure de début, et limité à xx vols
 - `most-delayed-flights`     : donne les 5 vols qui ont subis les plus longs retards à l'arrivée
 - `most-delayed-airlines`    : donne les 5 compagnies aériennes qui ont, en moyenne, le plus de retards
-- `airlines <port_id>` : recherche compagnies aériens qui ont des vols qui partent de l'aéroport `IATA_AIRPORT`
+- `delayed-airline <airline_id>`    : donne le retard moyen de la compagnie aérienne passée en paramètre
+- `most-delayed-airlines-at-airport <airport_id>`    : donne les 3 compagnies aériennes avec le plus de retard d'arrivé à l'aéroport passée en paramètre
 - `changed-flights <date>` : les vols annulés ou déviés à la date <date> (format M-D)
 - `avg-flight-duration <port_id> <port_id>`: calcule le temps de vol moyen entre deux aéroports
-- `find-itinerary <port_id> <port_id> <date>`: trouve un itinéraire entre deux aéroports à une date donnée (il peut y avoir des escales)
+- `find-itinerary <port_id> <port_id> <date> [<time>] [limit=<xx>]`: trouve un ou plusieurs itinéraires entre deux aéroports à une date donnée (l'heure est optionnel, requête peut être limité à `xx` propositions, il peut y avoir des escales)
+- `find-multicity-itinerary <port_id_depart> <port_id_dest1> <date> [<time>] <port_id_dest2> <date> [<time>] ... <port_id_destN> <date> [<time>]`: trouve un itinéraire multiville qui permet de visiter plusieurs villes (il peut y avoir des escales pour chaque vol intermediaire)
 - `quit`       : quit
 
-**TODO: COMPLÈTER LES REQUETTES !!!**
 
-
+Pour information, les paramètres entre crochets `[ ]` sont optionnels et les paramètres entre `< >` indiquent une valeur à renseigner.
+Les dates sont au format `M-J` et l'heure `HHMM`
 Ainsi si votre exécutable s'appelle `projet_pa` il doit être possible de l'utiliser de la manière suivante:
 
 ~~~
@@ -99,9 +101,8 @@ find-itinerary PHX SAN 12-15
 most-delayed-flights
 most-delayed-airlines
 changed-flights 5-15
-
-
-**TODO: compléter requêtes, par exemple "multi-city itinerary with stops" !!!**
+find-itinerary DEN MCI 2-15 1030 limit=4
+find-itinerary SAN JFK 6-15 1030 IAD 6-19 1215 SLC 6-21 SAN 6-25
 ~~~
 
 ## Précisions sur les requêtes
@@ -139,7 +140,8 @@ VX,Virgin America
 WN,Southwest Airlines Co.
 ~~~
 
-### `show-flights <port_id> <date> [<time>] [limit=xx]`
+
+### `show-flights <port_id> <date> [<time>] [limit=<xx>]`
 
 > Exemple et affichage attendu
 
@@ -183,7 +185,7 @@ WN,Southwest Airlines Co.
 9,7,1,OO,LAX,SAN,2305,8.0,27.0,109,2359,-2.0,0,0
 ~~~
 
-### `most-delayed-airlines <port_id>`
+### `most-delayed-airlines`
 
 > Exemple et affichage attendu
 
@@ -196,24 +198,27 @@ VX,Virgin America
 WN,Southwest Airlines Co.
 ~~~
 
-### `airlines <port_id>`
+### `delayed-airline <airline_id>`
 
 > Exemple et affichage attendu
 
 ~~~
-> `airlines SFO`
-AA,American Airlines Inc.
-AS,Alaska Airlines Inc.
-B6,JetBlue Airways
-DL,Delta Air Lines Inc.
-F9,Frontier Airlines Inc.
-HA,Hawaiian Airlines Inc.
-OO,Skywest Airlines Inc.
-UA,United Air Lines Inc.
-US,US Airways Inc.
-VX,Virgin America
-WN,Southwest Airlines Co.
+> delayed-airline  AA
+AA,American Airlines Inc.,180
 ~~~
+
+
+### `most-delayed-airlines-by-airports <airport_id>`
+
+> Exemple et affichage attendu
+
+~~~
+> most-delayed-airlines-by-airports  LAX
+WN,Southwest Airlines Co.,30
+NK,Spirit Air Lines,18
+OO,Skywest Airlines Inc.,10
+~~~
+
 
 ### `changed-flights <date>`
 
@@ -238,7 +243,7 @@ WN,Southwest Airlines Co.
 average: 54.9 minutes (416 flights)
 ~~~
 
-### `find-itinerary <port_id> <port_id> <date>`
+### `find-itinerary <port_id> <port_id> <date> [<time>] [limit=<xx>]`
 
 > Exemple et affichage attendu
 
@@ -247,6 +252,18 @@ average: 54.9 minutes (416 flights)
 6,15,1,WN,SFO,ATL,700,-5.0,250.0,2139,1450,-22.0,0,0
 6,15,1,EV,ATL,CHA,1835,7.0,25.0,106,1927,-4.0,0,0
 ~~~
+
+
+### `find-multicity-itinerary <port_id_depart> <port_id_dest1> <date> [<time>] <port_id_dest2> <date> [<time>] ... <port_id_destN> <date> [<time>]`
+
+> Exemple et affichage attendu
+
+~~~
+> find-itinerary SAN JFK 6-15 1030 IAD 6-19 1215 SLC 6-21 SAN 6-25
+...
+~~~
+
+
 
 ## Déliverables
 
@@ -294,17 +311,22 @@ L’évaluation de ce projet sera faite en utilisant de manière intensive les o
 Pour etre plus facilement lisible, vos commits devront suivre une convention de nommage. La convention utilisée par AngularJS est devenue très populaire. Elle est décrite à l’adresse suivante [Commit Message Conventions](https://gist.github.com/stephenparish/9941e89d80e2bc58a153).
 
 
+## Intégrer les changements du sujet dans votre dépôt suite à un fork
 
+Si vous avez crée votre dépôt en utilisant la fonctionalité de fork, vous pouvez continuer à intégrer directement les mises-à-jour. Pour ce faire, vous devez :
+1. Ajouter le dépôt comme un nouveau serveur distant différent à `origin`
+2. Recupérer les changements en indicant d’utiliser ce dépôt et la branche master
 
+Voici les commandes :
+```bash
+git remote add depot_sujet https://gitlab.univ-lille.fr/walter.rudametkin/projet_se3_2021.git
+git pull depot_sujet master
+```
+En cas de conflit, vous devez les gérer manuellement. Si vous voulez annuler une merge, vous pouvez utiliser `git merge --abort` pour revenir à l’état juste avant le `git pull`.
 
+En cas d’erreur, n’hésitez pas à consulter la commande `git remote -v` et `git remote remove <dépôt>` qui permettent d’afficher les dépôts distants et supprimer un dépôt distant, respectivement.
 
-
-
-
-
-
-
-
-
-
-
+Une fois que vous avez intégré les changements, il faudra les partager sur votre dépôt distant avec
+```bash
+git push
+```
