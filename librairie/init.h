@@ -9,7 +9,7 @@
 
 #define max_Hairport 78
 #define max_Hcomp 52
-#define max_Hdate 365
+#define max_Hdelay 
 
 // Table airport
 
@@ -25,7 +25,7 @@ struct airport {
 
 struct cellule_airport {
 	struct airport airport;
-	struct compagnie* pt_comp;
+	struct compagnie* pt_Htable_compagnie;
 	struct cellule_airport* airport_suiv;
 };
 
@@ -45,7 +45,7 @@ struct IATA_AIRLINE {
 
 struct compagnie {
 	char IATA_CODE[SIZE_airline_acro];// nous avons choisie de garder la compagnie ici et pas de poitneur car trois octet vs 8
-	struct vol* pt_vol;
+	struct celulle_vol_date* pt_Htable_delay;
 	struct compagnie* compagnie_suiv;
 };
 
@@ -53,8 +53,7 @@ struct compagnie Htable_compagnie[max_Hcomp];
 
 
 
-//Table vol
-
+//Table delay vers date -> vol
 
 struct vol {
 
@@ -74,10 +73,10 @@ struct vol {
 
 };
 
-struct cellule_vol
+struct cellule_vol_date
 {
 	struct vol vol;
-	struct cellule_vol *vol_suiv;
+	struct cellule_vol_date* vol_suiv;
 };
 
-struct vol Htable_vol[max_Hdate];
+struct cellule_vol_date Htable_delay[max_Hdelay];
