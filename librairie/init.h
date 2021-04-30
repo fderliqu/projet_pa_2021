@@ -9,7 +9,8 @@
 
 #define max_Hairport 78
 #define max_Hcomp 52
-#define max_Hdelay 
+#define max_Hnamecomp 2626 //premier lettre + 2eme *100
+#define max_Hdate 12 
 
 // Table airport
 
@@ -34,18 +35,23 @@ struct cellule_airport Htable_airport[max_Hairport];
 
 //IATA_AIRLINE
 
+//table de hachage ici 
+
 
 struct IATA_AIRLINE {
 	char IATA_CODE[SIZE_airline_acro];
 	char AIRLINE[SIZE_airline];
-	struct IATA_AIRLINE* iata_suiv;
+	struct IATA_AIRLINE *compagnie_suiv;
 };
+
+
+struct IATA_AIRLINE Htable_name_compagnie[max_Hcomp];
 
 //Table compagnie
 
 struct compagnie {
 	char IATA_CODE[SIZE_airline_acro];// nous avons choisie de garder la compagnie ici et pas de poitneur car trois octet vs 8
-	struct celulle_vol_date* pt_Htable_delay;
+	struct celulle_vol_date* pt_Htable_date;
 	struct compagnie* compagnie_suiv;
 };
 
@@ -53,7 +59,7 @@ struct compagnie Htable_compagnie[max_Hcomp];
 
 
 
-//Table delay vers date -> vol
+//Table date 
 
 struct vol {
 
@@ -79,4 +85,4 @@ struct cellule_vol_date
 	struct cellule_vol_date* vol_suiv;
 };
 
-struct cellule_vol_date Htable_delay[max_Hdelay];
+struct cellule_vol_date Htable_date[max_Hdate];
