@@ -47,6 +47,6 @@ void show_airlines(char IATA_CODE_c[SIZE_airport], struct cellule_airport Htable
 		}
 
 	}
-	printf("l'aeroport n'existe pas fin du programme.")
+	printf("l'aeroport n'existe pas fin du programme.");
 
 }
