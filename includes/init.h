@@ -38,14 +38,14 @@ typedef struct cellule_airport Htable_airport[max_Hairport];
 //table de hachage ici 
 
 
-struct IATA_AIRLINE {
+struct cellule_IATA_AIRLINE {
 	char IATA_CODE[SIZE_airline_acro];
 	char AIRLINE[SIZE_airline];
 	struct IATA_AIRLINE *compagnie_suiv;
 };
 
 
-//struct IATA_AIRLINE Htable_name_compagnie[max_Hcomp];
+//struct IATA_AIRLINE *Htable_name_compagnie[max_Hcomp];
 
 //Table compagnie
 
