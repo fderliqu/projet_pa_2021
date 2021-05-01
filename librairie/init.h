@@ -26,7 +26,7 @@ struct airport {
 
 struct cellule_airport {
 	struct airport airport;
-	struct compagnie* pt_Htable_compagnie;
+	struct compagnie pt_Htable_compagnie[max_Hcomp];
 	struct cellule_airport* airport_suiv;
 };
 
@@ -51,7 +51,7 @@ struct IATA_AIRLINE Htable_name_compagnie[max_Hcomp];
 
 struct compagnie {
 	char IATA_CODE[SIZE_airline_acro];// nous avons choisie de garder la compagnie ici et pas de poitneur car trois octet vs 8
-	struct celulle_vol_date* pt_Htable_date;
+	struct celulle_vol_date Htable_date[max_Hdate];
 	struct compagnie* compagnie_suiv;
 };
 
