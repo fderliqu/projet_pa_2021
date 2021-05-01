@@ -16,11 +16,11 @@ void show_airports(char IATA_CODE_c[SIZE_airline_acro], struct cellule_airport H
 	for (cpt_airport = 0; cpt_airport <= max_Hairport; cpt_airport++)
 	{
 		// parcours de la liste chainer des airports
-		Buff = &Htable_airport[cpt_airport];
+		Buff = Htable_airport[cpt_airport];
 		while (Buff != NULL)
 		{
 			//recherche dans la table de h des compagnie
-			Buffcomp = &(Buff->pt_Htable_compagnie[Hcode]);
+			Buffcomp = Buff->pt_Htable_compagnie[Hcode];
 			if (Buffcomp != NULL)
 			{
 				//parcorus dans la liste chainer des compagnies

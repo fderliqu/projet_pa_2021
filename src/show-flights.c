@@ -2,7 +2,7 @@ void show_flights(char IATA_CODE_c[SIZE_airport], int J, int M, int time, int li
 {
 	int Hcode_port, Hcode_date, cpt_vol, cpt_airline, cpt_date, cpt_chaine, stop_while;
 	struct cellule_airport* Buffairport;
-	struct compagnie* Buffcomp;
+	struct cellule_compagnie* Buffcomp;
 	struct cellule_vol_date* Buffdate;
 	struct vol volaffiche;
 
@@ -13,7 +13,7 @@ void show_flights(char IATA_CODE_c[SIZE_airport], int J, int M, int time, int li
 
 	Hcode_port = 4;//fonction hcode_airport
 	Hcode_date = 4;//fonction hcode_airport
-	Buffairport = &Htable_airport[Hcode_port];
+	Buffairport = Htable_airport[Hcode_port];
 	printf("recherche des vols au depart de l'aerport : \n");
 	//parcours des airport
 	while (Buffairport != NULL)
@@ -24,12 +24,12 @@ void show_flights(char IATA_CODE_c[SIZE_airport], int J, int M, int time, int li
 			//parcours de la Htable des compagnie
 			for (cpt_airline = 0; cpt_airline <= max_Hcomp; cpt_airline++)
 			{
-				Buffcomp = &(Buffairport->pt_Htable_compagnie[cpt_airline]);
+				Buffcomp = Buffairport->pt_Htable_compagnie[cpt_airline];
 				//parcorus dans la liste chainer des compagnies
 				while (Buffcomp != NULL)
 				{
 					//parcours dans la Htables des dates
-					Buffdate = &(Buffcomp->pt_Htable_date[Hcode_date]);
+					Buffdate = Buffcomp->pt_Htable_date[Hcode_date];
 					cpt_chaine = 0;
 					stop_while = 0;
 					while (Buffdate != NULL && stop_while = 0;)
