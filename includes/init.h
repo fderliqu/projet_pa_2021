@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define SIZE_acronym 3
+#define SIZE_acronym 4
 #define SIZE_city 30
 #define SIZE_airport 100
 #define SIZE_airline 50
-#define SIZE_airline_acro 2
+#define SIZE_airline_acro 3
 
 #define max_Hairport 375
-#define max_Hcomp 52
+#define max_Hcomp 70
 #define max_Hnamecomp 2626 //premier lettre + 2eme *100
 #define max_Hdate 12 
 
@@ -52,7 +52,7 @@ struct cellule_IATA_AIRLINE {
 struct cellule_compagnie {
 	char IATA_CODE[SIZE_airline_acro];// nous avons choisie de garder la compagnie ici et pas de poitneur car trois octet vs 8
 	struct cellule_vol_date* pt_Htable_date[max_Hdate];
-	struct compagnie* compagnie_suiv;
+	struct cellule_compagnie* compagnie_suiv;
 };
 
 //struct cellule_compagnie Htable_compagnie[max_Hcomp];
