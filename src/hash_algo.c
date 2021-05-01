@@ -1,4 +1,4 @@
-#include"../includes/init.h"
+
 #include"../includes/hash_algo.h"
 
 int my_pow(int a,int b)
@@ -10,9 +10,20 @@ int my_pow(int a,int b)
 int get_hash_index_airport(char iata_code[SIZE_acronym])
 {
     return 
-    (iata_code[2]-A_ascii + 
-    (iata_code[1]-A_ascii)*(MAX_LETTER) + 
-    (iata_code[0]-A_ascii)*my_pow(MAX_LETTER,2))%max_Hairport;
+    (iata_code[2]-'A' + 
+    (iata_code[1]-'A')*(MAX_LETTER) + 
+    (iata_code[0]-'A')*my_pow(MAX_LETTER,2))%max_Hairport;
+}
+
+int get_hash_index_airline(char iata_code[SIZE_airline_acro])
+{
+    int code=0;
+    for(int i=0; i<SIZE_airline_acro; i++)
+    {
+        if(iata_code[i]<'A')code += iata_code[i]-'0';
+        else code += iata_code[i]-'A'+10;
+    }
+    return code%max_Hcomp;
 }
 
 void init_ht_airport(struct cellule_airport* Ht_comp[max_Hairport])
@@ -25,12 +36,12 @@ void init_ht_comp(struct cellule_compagnie* Ht_comp[max_Hcomp])
     for(int i=0; i<max_Hcomp; i++)Ht_comp[i] = NULL;
 }
 
-void init_ht_date(struct cellule_airport* Ht_comp[max_Hdate])
+void init_ht_date(struct cellule_vol_date* Ht_comp[max_Hdate])
 {
     for(int i=0; i<max_Hdate; i++)Ht_comp[i] = NULL;
 }
 
-void init_ht_namecomp(struct cellule_airport* Ht_comp[max_Hnamecomp])
+void init_ht_namecomp(struct cellule_IATA_AIRLINE* Ht_comp[max_Hnamecomp])
 {
     for(int i=0; i<max_Hnamecomp; i++)Ht_comp[i] = NULL;
 }
