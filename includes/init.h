@@ -55,8 +55,7 @@ struct cellule_compagnie {
 	struct compagnie* compagnie_suiv;
 };
 
-struct compagnie Htable_compagnie[max_Hcomp];
-
+struct cellule_compagnie Htable_compagnie[max_Hcomp];
 
 
 //Table date 
