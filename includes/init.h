@@ -26,11 +26,11 @@ struct airport {
 
 struct cellule_airport {
 	struct airport airport;
-	struct compagnie* pt_Htable_compagnie[max_Hcomp];
+	struct cellule_compagnie* pt_Htable_compagnie[max_Hcomp];
 	struct cellule_airport* airport_suiv;
 };
 
-struct cellule_airport Htable_airport[max_Hairport];
+typedef struct cellule_airport Htable_airport[max_Hairport];
 
 
 //IATA_AIRLINE
@@ -45,7 +45,7 @@ struct IATA_AIRLINE {
 };
 
 
-struct IATA_AIRLINE Htable_name_compagnie[max_Hcomp];
+//struct IATA_AIRLINE Htable_name_compagnie[max_Hcomp];
 
 //Table compagnie
 
@@ -55,7 +55,7 @@ struct cellule_compagnie {
 	struct compagnie* compagnie_suiv;
 };
 
-struct cellule_compagnie Htable_compagnie[max_Hcomp];
+//struct cellule_compagnie Htable_compagnie[max_Hcomp];
 
 
 //Table date 
@@ -84,4 +84,4 @@ struct cellule_vol_date
 	struct cellule_vol_date* vol_suiv;
 };
 
-struct cellule_vol_date* Htable_date[max_Hdate];
+//struct cellule_vol_date* Htable_date[max_Hdate];
