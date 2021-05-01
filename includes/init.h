@@ -7,7 +7,7 @@
 #define SIZE_airline 50
 #define SIZE_airline_acro 2
 
-#define max_Hairport 78
+#define max_Hairport 375
 #define max_Hcomp 52
 #define max_Hnamecomp 2626 //premier lettre + 2eme *100
 #define max_Hdate 12 
@@ -30,7 +30,7 @@ struct cellule_airport {
 	struct cellule_airport* airport_suiv;
 };
 
-struct cellule_airport Htable_airport[max_Hairport];
+typedef struct cellule_airport Htable_airport[max_Hairport];
 
 
 //IATA_AIRLINE
