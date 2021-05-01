@@ -55,7 +55,7 @@ struct compagnie {
 	struct compagnie* compagnie_suiv;
 };
 
-struct compagnie Htable_compagnie[max_Hcomp];
+//struct compagnie Htable_compagnie[max_Hcomp];
 
 
 
