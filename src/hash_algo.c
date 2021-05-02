@@ -18,10 +18,10 @@ int get_hash_index_airport(char iata_code[SIZE_acronym])
 int get_hash_index_airline(char iata_code[SIZE_airline_acro])
 {
     int code=0;
-    for(int i=0; i<SIZE_airline_acro; i++)
+    for(int i=0; i<SIZE_airline_acro-1; i++)
     {
-        if(iata_code[i]<'A')code += iata_code[i]-'0';
-        else code += iata_code[i]-'A'+10;
+        if(iata_code[i]>='A')code += iata_code[i]-'A'+10;
+        else code += iata_code[i]-'0';
     }
     return code%max_Hcomp;
 }

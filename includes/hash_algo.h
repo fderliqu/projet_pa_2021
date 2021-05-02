@@ -9,7 +9,7 @@ int get_hash_index_airport(char *);
 
 int get_hash_index_airline(char *);
 
-void init_ht_airport(struct cellule_airport* Ht_comp[max_Hairport]);
+void init_ht_airport(struct cellule_airport**);
 
 void init_ht_comp(struct cellule_compagnie**);
 
