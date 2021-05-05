@@ -62,16 +62,16 @@ struct cellule_compagnie {
 
 struct vol {
 
-	int MONTH;
-	int DAY;
-	int WEEKDAY;
+	long MONTH;
+	long DAY;
+	long WEEKDAY;
 	char ORG_AIR[SIZE_acronym];
 	char DEST_AIR[SIZE_acronym];
-	int SCHED_DEP;
+	long SCHED_DEP;
 	float DEP_DELAY;
 	float AIR_TIME;
-	int DIST;
-	int SCHED_ARR;
+	long DIST;
+	long SCHED_ARR;
 	float ARR_DELAY;
 	short DIVERTED;
 	short CANCELLED;
