@@ -1,9 +1,9 @@
-TARGET=project
+TARGET=bin/project
 CFLAGS=-g -W -Wall -Wextra -MMD -02
 LDFLAGS=-lm
-SRC=./src/$(wildcard *.c)
+SRC=$src/(wildcard *.c)
 DEPS=$(SRC:.c=.d)
-OBJ=./lib/$(SRC:.c=.o)
+OBJ=lib/$(SRC:.c=.o)
 	
 default: $(TARGET)
 	
