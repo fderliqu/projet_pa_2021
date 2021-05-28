@@ -6,7 +6,6 @@ RESTE A FAIRE :
 #include "../includes/hash_algo.h"
 #define max_colonne 14
 #define max_strtab_lenght 10
-#define max_hash 17575
 
 int compare(struct vol v1, struct vol v2) { return v1.DAY - v2.DAY; }
 
@@ -118,10 +117,8 @@ int get_hash_index(char iata_code[SIZE_acronym]) {
 // fin test
 
 void charge_vol(struct cellule_airport *ht_ap[max_Hairport]) {
-  FILE *fp = fopen("../data/flights.csv", "re");
+  FILE *fp = fopen("../data/flights.csv", "r");
   if (fp != NULL) {
-    // struct cellule_vol_date* Hashtable[max_hash]; //C'est pour les tests des
-    // perfs struct cellule_vol_date* cell_vol = NULL;
     struct cellule_airport *Buffairport;
     struct cellule_compagnie *Buffairline;
     char strtab[max_colonne][max_strtab_lenght];
@@ -140,9 +137,6 @@ void charge_vol(struct cellule_airport *ht_ap[max_Hairport]) {
                                          // le met pas dans la struct vol = gain
                                          // de place
       strncpy(IATA_code, strtab[3], SIZE_airline_acro);
-      // ajout_vol_date( &( Hashtable[ get_hash_index( vol.ORG_AIR ) ] ), vol);
-      // ajout_vol_date(&cell_vol,vol);
-      // fscanf(fp,"%s",tmp);
       Buffairport = recherche_et_ajout_cell_airport(
           &(ht_ap[get_hash_index_airport(vol.ORG_AIR)]), vol.ORG_AIR);
       // Buffairport pointe vers la cellule de la table de hash des aéroport
@@ -169,38 +163,104 @@ void charge_vol(struct cellule_airport *ht_ap[max_Hairport]) {
     printf("fin\n");
   }
 }
-// Fonctions de test ne pas check
-void print_cell_ap(struct cellule_airport *PTcell) {
-  if (PTcell == NULL) {
-    return;
+
+struct cellule_airport *
+recherche_cell_airport(struct cellule_airport *pl,
+                                char str[SIZE_acronym]) {
+  if ( pl == NULL ) {
+    return pl;
   }
-  printf("%s,", PTcell->airport.IATA_CODE);
-  print_cell_ap(PTcell->airport_suiv);
+  if (!strncmp(pl->airport.IATA_CODE, str, SIZE_acronym)) {
+    return pl;
+  }
+  return recherche_cell_airport(pl->airport_suiv, str);
 }
 
-void print_cell_al(struct cellule_compagnie *PTcell) {
-  if (PTcell == NULL) {
-    return;
+struct cellule_compagnie *
+recherche_cell_airline(struct cellule_compagnie *pl,
+                                char str[SIZE_airline_acro]) {
+  if ( pl == NULL ) {
+    return pl;
   }
-  printf("%s,", PTcell->IATA_CODE);
-  print_cell_al(PTcell->compagnie_suiv);
-}
-void print_ht_ap(struct cellule_airport *ht_ap[max_Hairport]) {
-  for (int i = 0; i < max_Hairport; i++) {
-    printf("[%d] -> ", i);
-    print_cell_ap(ht_ap[i]);
-    printf("\n");
+  if (!strncmp(pl->IATA_CODE, str, SIZE_airline_acro)) {
+    return pl;
   }
-  printf("\n");
+  return recherche_cell_airline(pl->compagnie_suiv, str);
 }
 
-void print_ht_al(struct cellule_compagnie *ht_al[max_Hcomp]) {
-  for (int i = 0; i < max_Hcomp; i++) {
-    printf("[%d] -> ", i);
-    print_cell_al(ht_al[i]);
-    printf("\n");
+void print_flight_cell(struct cellule_vol_date* Buff_vol, char airline[SIZE_airline_acro])
+{
+  printf( "%d,%d,%d,%s,%s,%s,%d,%f,%f,%d,%d,%f,%hd,%hd\n",Buff_vol->vol.MONTH, 
+                                                            Buff_vol->vol.DAY,
+                                                            Buff_vol->vol.WEEKDAY,
+                                                            airline,
+                                                            Buff_vol->vol.ORG_AIR,
+                                                            Buff_vol->vol.DEST_AIR,
+                                                            Buff_vol->vol.SCHED_DEP,
+                                                            Buff_vol->vol.DEP_DELAY,
+                                                            Buff_vol->vol.AIR_TIME,
+                                                            Buff_vol->vol.DIST,
+                                                            Buff_vol->vol.SCHED_ARR,
+                                                            Buff_vol->vol.ARR_DELAY,
+                                                            Buff_vol->vol.DIVERTED,
+                                                            Buff_vol->vol.CANCELLED
+    );
+}
+
+void print_all_flight(struct cellule_airport *HT[max_Hairport]){
+  int compt = 0;
+  struct cellule_airport    *Buffairport;
+  struct cellule_compagnie  *Buffairline;
+  struct cellule_vol_date   *Buff_vol;
+  for(int i = 0; i < max_Hairport; i++) {
+    Buffairport = HT[i];
+    while(Buffairport != NULL) {
+      for(int j = 0; j < max_Hcomp; j++) {
+        Buffairline = Buffairport->pt_Htable_compagnie[j];
+        while(Buffairline != NULL) {
+          for(int k = 0; k < 12; k++) {
+            Buff_vol = Buffairline->pt_Htable_date[k];
+            if(Buff_vol != NULL) { printf("Month %d | Begin airport : %s | Airline : %s\n",Buff_vol->vol.MONTH, Buffairport->airport.IATA_CODE, Buffairline->IATA_CODE); }
+            while(Buff_vol != NULL) {
+              print_flight_cell(Buff_vol,Buffairline->IATA_CODE);
+              Buff_vol = Buff_vol->vol_suiv;
+              compt++;
+            }
+          }
+          Buffairline = Buffairline->compagnie_suiv;
+        }
+      }
+      Buffairport = Buffairport->airport_suiv;
+    }
   }
-  printf("\n");
+  printf("%d lines printed\n",compt);
+}
+
+void print_specifique_flight(struct cellule_airport *HT[max_Hairport], char airport[SIZE_acronym], char airline[SIZE_airline_acro], int month)
+{
+  if(month < 1 || month > 12){
+    printf("Month number is incorrect, please enter a correct month\n");
+    return;
+  }
+  struct cellule_airport    *Buffairport;
+  struct cellule_compagnie  *Buffairline;
+  struct cellule_vol_date   *Buff_vol;
+  Buffairport = recherche_cell_airport(HT[get_hash_index_airport(airport)], airport);
+  if(Buffairport == NULL){
+    printf("There are no flight with the given value of begin airport\n");
+    return;
+  }
+  Buffairline = recherche_cell_airline(Buffairport->pt_Htable_compagnie[get_hash_index_airline(airline)], airline);
+  if(Buffairline == NULL){
+    printf("There is no flight with the given value of airline on this begin airport\n");
+    return;
+  }
+  Buff_vol = Buffairline->pt_Htable_date[month-1];
+  printf("Month %d | Begin airport : %s | Airline : %s\n",month, airport, airline); 
+  while(Buff_vol != NULL){
+    print_flight_cell(Buff_vol,airline);
+    Buff_vol = Buff_vol->vol_suiv;
+  }
 }
 
 // le main chargement des flights
@@ -209,24 +269,6 @@ int main() {
   // Initialisation de la premiere table de hash (par aéroport de départ)
   init_ht_airport(HT);
   charge_vol(HT);
+  //print_all_flight(HT);
+  print_specifique_flight(HT,"MSP","US",4);
 }
-/*
-printf("%d,%d,%d,%s,%s,%s,%d,%f,%f,%d,%d,%f,%hd,%hd\n",
-                    vol.MONTH,
-                    vol.DAY,
-                    vol.WEEKDAY,
-            IATA_code,
-                    vol.ORG_AIR,
-                    vol.DEST_AIR,
-                    vol.SCHED_DEP,
-                    vol.DEP_DELAY,
-                    vol.AIR_TIME,
-                    vol.DIST,
-                    vol.SCHED_ARR
-                    ,vol.ARR_DELAY
-                    ,vol.DIVERTED
-                    ,vol.CANCELLED);
-            */
-/*
-ajout_vol_date( &( Hashtable[ get_hash_index( vol.ORG_AIR ) ] ), vol);
-fscanf(fp,"%s",tmp);*/
