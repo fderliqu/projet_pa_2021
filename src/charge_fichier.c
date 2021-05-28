@@ -130,7 +130,7 @@ void charge_vol(struct cellule_airport *ht_ap[max_Hairport]) {
       Buffairport = recherche_cellHT_airport(ht_ap[index], vol.ORG_AIR);
       if(Buffairport==NULL)
       {
-        ajout_tete_cellHT_airport(&(ht_ap[index]), ht_apDATA[ get_hash_index_airport(vol.ORG_AIR, max_Hdataairport) ]->data, 1);
+        ajout_tete_cellHT_airport(&(ht_ap[index]), ht_apDATA[ get_hash_index_airport(vol.ORG_AIR, max_Hdataairport) ]->data, 0);
         Buffairport = ht_ap[index];
       }
       // Buffairport pointe vers la cellule de la table de hash des aéroport
@@ -168,7 +168,7 @@ void charge_vol(struct cellule_airport *ht_ap[max_Hairport]) {
         if(Buffairport==NULL)
         {
           dataAPtmp = ht_apDATA[i]->data;
-          ajout_tete_cellHT_airport(&(ht_ap[index]), dataAPtmp, 0);
+          ajout_tete_cellHT_airport(&(ht_ap[index]), dataAPtmp, 1);
         }
       }
     }
@@ -234,9 +234,30 @@ void print_specifique_flight(struct cellule_airport *HT[max_Hairport], char airp
   struct cellule_compagnie  *Buffairline;
   struct cellule_vol_date   *Buff_vol;
   Buffairport = recherche_cellHT_airport(HT[get_hash_index_airport(airport,max_Hairport)], airport);
+  /*printf("%s\n",Buffairport->data.IATA_CODE);
+  for(int i=0;i<max_Hcomp;i++)
+  {
+    test = Buffairport->pt_Htable_compagnie[i];
+    printf("test\n");
+    while(test != NULL)
+    {
+      printf("%d->%s\n",i,test->IATA_CODE);
+      test=test->compagnie_suiv;
+    }
+  }*/
+  if(Buffairport==NULL)
+  {
+    printf("This airport does not exist\n");
+    return;
+  }
+  if(Buffairport->is_empty != 0)
+  {
+    printf("There is no flight with the given value of the airport\n");
+    return;
+  }
   Buffairline = recherche_cellHT_compagnie(Buffairport->pt_Htable_compagnie[get_hash_index_airline(airline,max_Hcomp)], airline);
   if(Buffairline == NULL){
-    printf("There is no flight with the given value\n");
+    printf("There is no flight with the given value of the airline in this airport\n");
     return;
   }
   Buff_vol = Buffairline->pt_Htable_date[month-1];
@@ -267,30 +288,3 @@ void print_airport(struct cellule_airport *HT[max_Hairport])
   }
   printf("%d\n",compt);
 }
-/*
-int main() {
-  struct cellule_airport *HT[max_Hairport];
-  struct cellule_compagnieDATA *HTalData[max_Hdatacomp];
-  struct cellule_compagnieDATA *tmp;
-  // Initialisation de la premiere table de hash (par aéroport de départ)
-  init_ht_airport(HT);
-  charge_vol(HT);
-  print_airport(HT);
-  print_specifique_flight(HT,"SHV","US",4);
-  init_ht_datacomp(HTalData);
-  charge_dataCompagnie(HTalData);
-  for(int i=0;i<max_Hdatacomp;i++)
-  {
-    if(HTalData[i]!=NULL)
-    {
-      tmp = HTalData[i];
-      printf("[%d] :\n",i);
-      while(tmp != NULL)
-      {
-        printf("%s,%s\n",tmp->IATA_CODE,tmp->AIRLINE);
-        tmp = tmp->compagnie_suiv;
-      }
-    }
-  }
-}
-*/

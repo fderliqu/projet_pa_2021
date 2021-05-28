@@ -9,7 +9,11 @@ void ajout_tete_cellHT_airport(struct cellule_airport **pl,
                                 struct airport data, int choix) {
   struct cellule_airport *cell = malloc(sizeof(struct cellule_airport));
   cell->data = data;
-  if(choix>0) init_ht_comp(cell->pt_Htable_compagnie);
+  cell->is_empty = choix;
+  if(choix<=0)
+  {
+    init_ht_comp(cell->pt_Htable_compagnie);
+  }
   cell->airport_suiv = *pl;
   *pl = cell;
 }

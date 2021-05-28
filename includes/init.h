@@ -30,6 +30,7 @@ struct cellule_airport {
 	struct airport data;
 	struct cellule_compagnie* pt_Htable_compagnie[max_Hcomp];
 	struct cellule_airport* airport_suiv;
+	int is_empty;
 };
 
 typedef struct cellule_airport Htable_airport[max_Hairport];
