@@ -9,7 +9,7 @@
 
 #define max_Hairport 375
 #define max_Hcomp 70
-#define max_Hnamecomp 2626 //premier lettre + 2eme *100
+#define max_Hnamecomp 1225 //35*35 possibilité
 #define max_Hdate 12 
 
 // Table airport
@@ -25,7 +25,7 @@ struct airport {
 };
 
 struct cellule_airport {
-	struct airport airport;
+	char IATA_CODE[SIZE_airline_acro];
 	struct cellule_compagnie* pt_Htable_compagnie[max_Hcomp];
 	struct cellule_airport* airport_suiv;
 };
@@ -35,17 +35,11 @@ typedef struct cellule_airport Htable_airport[max_Hairport];
 
 //IATA_AIRLINE
 
-//table de hachage ici 
-
-
 struct cellule_IATA_AIRLINE {
 	char IATA_CODE[SIZE_airline_acro];
 	char AIRLINE[SIZE_airline];
 	struct IATA_AIRLINE *compagnie_suiv;
 };
-
-
-//struct IATA_AIRLINE *Htable_name_compagnie[max_Hcomp];
 
 //Table compagnie
 
@@ -54,9 +48,6 @@ struct cellule_compagnie {
 	struct cellule_vol_date* pt_Htable_date[max_Hdate];
 	struct cellule_compagnie* compagnie_suiv;
 };
-
-//struct cellule_compagnie Htable_compagnie[max_Hcomp];
-
 
 //Table date 
 
