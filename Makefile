@@ -1,9 +1,9 @@
-TARGET=bin/project
-CFLAGS=-g -W -Wall -Wextra -MMD -02
-LDFLAGS=-lm
-SRC=$src/(wildcard *.c)
-DEPS=$(SRC:.c=.d)
+TARGET=main
+CFLAGS= -g -W -Wall -Wextra -MMD -02
+SRC=(wildcard src/*.c)
 OBJ=lib/$(SRC:.c=.o)
+
+$(shell mkdir -p lib)
 	
 default: $(TARGET)
 	
@@ -11,14 +11,10 @@ default: $(TARGET)
     gcc $(CFLAGS) -c $<
 	
 $(TARGET): $(OBJ)
-    gcc $(LDFLAGS) $^ -o $@
-	
--include $(DEPS)
+    gcc $^ -o $@
 	
 .PHONY: clean
 	
 clean:
-	
-    rm -f *.o
-	
+    rm -f lib/*.o
     rm -f $(TARGET)
