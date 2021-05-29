@@ -1,0 +1,1 @@
+void avg_flight_duration(struct cellule_airport**, char*, char*);

@@ -1,97 +1,125 @@
-void show_flights(char IATA_CODE_c[SIZE_airport], int J, int M, int time, int limit, struct cellule_airport Htable_airport[max_Hairport])
+#include "../includes/hash_algo.h"
+#include "../includes/cell_function.h"
+#include "../includes/charge_fichier.h"
+#include "../includes/show-flights.h"
+#define MAXlimit 2359
+
+
+void print_normal_flight(struct cellule_vol_date* cell, char airline[SIZE_airline_acro])
 {
-	int Hcode_port, Hcode_date, cpt_vol, cpt_airline, cpt_date, cpt_chaine, stop_while;
-	struct cellule_airport* Buffairport;
-	struct cellule_compagnie* Buffcomp;
-	struct cellule_vol_date* Buffdate;
-	struct vol volaffiche;
-
-	if (limit != NULL)
-	{
-		cpt_vol = limit;
-	}
-
-	Hcode_port = 4;//fonction hcode_airport
-	Hcode_date = 4;//fonction hcode_airport
-	Buffairport = Htable_airport[Hcode_port];
-	printf("recherche des vols au depart de l'aerport : \n");
-	//parcours des airport
-	while (Buffairport != NULL)
-	{
-		// si on a trouver l'aeroport rechercher
-		if (strcmp(IATA_CODE_c, (Buffairport->airport.IATA_CODE)) == 0)
-		{
-			//parcours de la Htable des compagnie
-			for (cpt_airline = 0; cpt_airline <= max_Hcomp; cpt_airline++)
-			{
-				Buffcomp = Buffairport->pt_Htable_compagnie[cpt_airline];
-				//parcorus dans la liste chainer des compagnies
-				while (Buffcomp != NULL)
-				{
-					//parcours dans la Htables des dates
-					Buffdate = Buffcomp->pt_Htable_date[Hcode_date];
-					cpt_chaine = 0;
-					stop_while = 0;
-					while (Buffdate != NULL && stop_while = 0;)
-					{
-						volaffiche = Buffdate->vol;
-						//si on est sur la bonne date
-						if (volaffiche.MONTH == M && volaffiche.DAY == J)
-						{
-							if (time != NULL && limit != NULL)
-							{
-								if (volaffiche.SCHED_DEP == time)
-								{
-									printf("%d %d %d %s %s ", volaffiche.DAY, volaffiche.MONTH, volaffiche.WEEKDAY, volaffiche.ORG_AIR, volaffiche.DEST_AIR);
-									printf("%d %f %f %d %d ", volaffiche.SCHED_DEP, volaffiche.DEP_DELAY, volaffiche.AIR_TIME, volaffiche.DIST, volaffiche.SCHED_ARR);
-									printf("%f %d %d \n", volaffiche.ARR_DELAY, volaffiche.DIVERTED, volaffiche.CANCELLED);
-									cpt_vol--;
-									cpt_chaine++;
-								}
-								if (cpt_vol == 0)
-								{
-									return;
-								}
-							}
-							else if (time != NULL)
-							{
-								if (volaffiche.SCHED_DEP == time)
-								{
-									printf("%d %d %d %s %s ", volaffiche.DAY, volaffiche.MONTH, volaffiche.WEEKDAY, volaffiche.ORG_AIR, volaffiche.DEST_AIR);
-									printf("%d %f %f %d %d ", volaffiche.SCHED_DEP, volaffiche.DEP_DELAY, volaffiche.AIR_TIME, volaffiche.DIST, volaffiche.SCHED_ARR);
-									printf("%f %d %d \n", volaffiche.ARR_DELAY, volaffiche.DIVERTED, volaffiche.CANCELLED);
-									cpt_chaine++;
-								}
-							}
-							else
-							{
-								printf("%d %d %d %s %s ", volaffiche.DAY, volaffiche.MONTH, volaffiche.WEEKDAY, volaffiche.ORG_AIR, volaffiche.DEST_AIR);
-								printf("%d %f %f %d %d ", volaffiche.SCHED_DEP, volaffiche.DEP_DELAY, volaffiche.AIR_TIME, volaffiche.DIST, volaffiche.SCHED_ARR);
-								printf("%f %d %d \n", volaffiche.ARR_DELAY, volaffiche.DIVERTED, volaffiche.CANCELLED);
-								cpt_chaine++;
-							}
-						}
-						else //si non si on a deja fait le debut de la chaine (qui est trier alors on change de compagnie
-						{
-							if (cpt_chaine != 0)
-							{
-								stop_while == 1;
-							}
-
-						}
-						Buffdate = Buffdate->vol_suiv;
-					}
-
-					Buffcomp = Buffcomp->compagnie_suiv;
-				}
-			}
-		}
-		else
-		{
-			//recherche si le suivant airport est le bon  
-			Buffairport = Buffairport->airport_suiv;
-		}
-
-	}
-	printf("l'aeroport n'existe pas fin du programme.");
+	printf	("%d,%d,%d,%s,%s,%s,%d,%f,%f,%d,%d,%f,%hd,%hd\n",
+			cell->vol.MONTH,
+			cell->vol.DAY,
+			cell->vol.WEEKDAY,
+			airline,
+			cell->vol.ORG_AIR,
+			cell->vol.DEST_AIR,
+			cell->vol.SCHED_DEP,
+			cell->vol.DEP_DELAY,
+			cell->vol.AIR_TIME,
+			cell->vol.DIST,
+			cell->vol.SCHED_ARR,
+			cell->vol.ARR_DELAY,
+			cell->vol.DIVERTED,
+			cell->vol.CANCELLED
+			);
 }
+
+void print_cancelled_flight(struct cellule_vol_date* cell, char airline[SIZE_airline_acro])
+{
+	printf	("%d,%d,%d,%s,%s,%s,%d,%d,%d,%hd,%hd\n",
+			cell->vol.MONTH,
+			cell->vol.DAY,
+			cell->vol.WEEKDAY,
+			airline,
+			cell->vol.ORG_AIR,
+			cell->vol.DEST_AIR,
+			cell->vol.SCHED_DEP,
+			cell->vol.DIST,
+			cell->vol.SCHED_ARR,
+			cell->vol.DIVERTED,
+			cell->vol.CANCELLED
+			);
+}
+
+void print_diverted_flight(struct cellule_vol_date* cell, char airline[SIZE_airline_acro])
+{
+	printf	("%d,%d,%d,%s,%s,%s,%d,%f,%d,%d,%hd,%hd\n",
+			cell->vol.MONTH,
+			cell->vol.DAY,
+			cell->vol.WEEKDAY,
+			airline,
+			cell->vol.ORG_AIR,
+			cell->vol.DEST_AIR,
+			cell->vol.SCHED_DEP,
+			cell->vol.DEP_DELAY,
+			cell->vol.DIST,
+			cell->vol.SCHED_ARR,
+			cell->vol.DIVERTED,
+			cell->vol.CANCELLED
+			);
+}
+
+void show_flights(struct cellule_airport *main_HT[max_Hairport], char AIRPORT[SIZE_airport], int M, int J, int time, int limit, char mask)
+{
+	if(J<0 || J>31)
+	{
+		printf("Please write a correct day\n");
+		return;
+	}
+	if(M<0 || M>12)
+	{
+		printf("Please write a correct month\n");
+		return;
+	}
+	struct cellule_airport* Buffairport;
+    struct cellule_compagnie* Buffairline;
+    struct cellule_vol_date* Buffvol;
+	int compt=0;
+	if(!(mask & 0x01))limit=-1;
+	if(!(mask & 0x02))time=-1;
+	else if(time<0 || time>MAXlimit)
+	{
+		printf("Given time is over 23h59, please write a correct time\n");
+		return;
+	}
+	int index = get_hash_index_airport(AIRPORT,max_Hairport);
+	Buffairport = recherche_cellHT_airport(main_HT[index],AIRPORT);
+	if(Buffairport == NULL)
+	{
+		printf("This airport does not exists, please check syntaxe\n");
+		return;
+	}
+	if(Buffairport->is_empty)
+	{
+		printf("There are no flights from this departure airport\n");
+		return;
+	}
+	for(int i=0;i<max_Hcomp;i++)
+	{
+		Buffairline = Buffairport->pt_Htable_compagnie[i];
+		while(Buffairline!=NULL)
+		{
+			Buffvol = Buffairline->pt_Htable_date[M-1];
+			while(Buffvol != NULL)
+			{
+				if( (Buffvol->vol.DAY == J) && (Buffvol->vol.SCHED_DEP > time) )//La condition sera toujours valide à time = -1
+				{
+					if(Buffvol->vol.DIVERTED)print_diverted_flight(Buffvol,Buffairline->IATA_CODE);
+					else if(Buffvol->vol.CANCELLED)print_cancelled_flight(Buffvol,Buffairline->IATA_CODE);
+					else print_normal_flight(Buffvol,Buffairline->IATA_CODE);
+					compt++;
+					if(compt==limit) //La condition ne sera jamais valide à limit = -1
+					{
+						printf("limit reached, end of the function\n");
+						return;
+					}
+				}
+				Buffvol = Buffvol->vol_suiv;
+			}
+			Buffairline = Buffairline->compagnie_suiv;
+		}
+	}
+}
+
+

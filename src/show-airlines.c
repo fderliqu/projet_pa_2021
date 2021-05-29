@@ -10,6 +10,11 @@ void show_airlines(struct cellule_airport* main_HT[max_Hairport], struct cellule
     struct cellule_compagnieDATA* Buffdata;
 	int index = get_hash_index_airport(AIRPORT,max_Hairport);
 	Buffairport = recherche_cellHT_airport(main_HT[index],AIRPORT);
+	if(Buffairport == NULL)
+	{
+		printf("This airport does not exists, please check syntaxe\n");
+		return;
+	}
 	if(Buffairport->is_empty)
 	{
 		printf("No company operates flights at this airport\n");
