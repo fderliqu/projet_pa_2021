@@ -1,6 +1,7 @@
+#define max 5;
 
 struct liste {
-	struct vol volaffiche[5];
+	struct vol volaffiche[max];
 	int dernier;
 };
 
@@ -21,7 +22,7 @@ void most_delay(struct liste *lc, struct vol vol)
 	int cpt = 0;
 	struct vol buff;
 	//initialisation de la liste
-	if (lc->dernier < 5)
+	if (lc->dernier < max)
 	{
 		lc->dernier++;
 		while (cpt < lc->dernier - 1)
@@ -53,14 +54,14 @@ void most_delay(struct liste *lc, struct vol vol)
 	if (vol.ARR_DELAY < lc->volaffiche[0].ARR_DELAY) { return; }
 	//parcours de la liste
 	cpt = 1;
-	while (cpt < 5)
+	while (cpt < max)
 	{
 		if (vol.ARR_DELAY < lc->volaffiche[cpt].ARR_DELAY) { break; }
 		cpt++;
 	}
 	//modification de la liste 
-	buff = lc->volaffiche[cpt];
-	lc->volaffiche[cpt] = vol;
+	buff = lc->volaffiche[cpt-1];
+	lc->volaffiche[cpt-1] = vol;
 	cpt--;
 
 	while (cpt >= 0)
@@ -92,28 +93,26 @@ void show_most_delayed_flights(struct cellule_airport *Htable_airport[max_Hairpo
 		while (Buffairport != NULL)
 		{
 			//parcours de la Htable des compagnie
-			if (Buffairport->pt_Htable_compagnie!= NULL)
+		
+			for (cpt_airline = 0; cpt_airline <= max_Hcomp; cpt_airline++)
 			{
-				for (cpt_airline = 0; cpt_airline <= max_Hcomp; cpt_airline++)
+				Buffcomp = Buffairport->pt_Htable_compagnie[cpt_airline];
+				while (Buffcomp != NULL)
 				{
-					Buffcomp = Buffairport->pt_Htable_compagnie[cpt_airline];
-					while (Buffcomp != NULL)
+					for (cpt_date = 0; cpt_date <= max_Hdate; cpt_date++)
 					{
-						for (cpt_date = 0; cpt_date <= max_Hdate; cpt_date++)
-						{
-								Buffvol = Buffcomp->pt_Htable_date[cpt_date];
-								while (Buffvol != NULL)
-								{
-									most_delay(&lc, Buffvol->vol);
-									Buffvol = Buffvol->vol_suiv;
-								}
+							Buffvol = Buffcomp->pt_Htable_date[cpt_date];
+							while (Buffvol != NULL)
+							{
+								most_delay(&lc, Buffvol->vol);
+								Buffvol = Buffvol->vol_suiv;
+							}
 
-						}
-						Buffcomp = Buffcomp->compagnie_suiv;
 					}
+					Buffcomp = Buffcomp->compagnie_suiv;
 				}
-				Buffairport = Buffairport->airport_suiv;
 			}
+			Buffairport = Buffairport->airport_suiv;
 		}
 	}
 	afficheliste(&lc);
