@@ -3,6 +3,7 @@
 #include "../includes/charge_fichier.h"
 #include "../includes/show-airport.h"
 #include "../includes/show-airlines.h"
+#include "../includes/show-flights.h"
 
 int main() {
   struct cellule_airport *HT[max_Hairport];
@@ -12,7 +13,7 @@ int main() {
   init_ht_airport(HT);
   charge_vol(HT);
   //print_airport(HT);
-  print_specifique_flight(HT,"LAX","HA",1);
+  //print_specifique_flight(HT,"ATL","EV",2);
   init_ht_datacomp(HTalData, max_Hdatacomp);
   charge_dataCompagnie(HTalData);/*
   for(int i=0;i<max_Hdatacomp;i++)
@@ -30,4 +31,6 @@ int main() {
   }*/
   show_airport(HT,"HA");
   show_airlines(HT,HTalData,"LAX");
+  show_flights(HT,"ATL",11,18,1200,10,0x03);//mask -> limit on (bit 0) / time on (bit 1)
+  printf("fin\n");
 }
