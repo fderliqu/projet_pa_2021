@@ -102,7 +102,7 @@ void charge_dataCompagnie(struct cellule_compagnieDATA *ht_alData[max_Hdatacomp]
 
 void charge_vol(struct cellule_airport *ht_ap[max_Hairport]) {
   struct cellule_airportDATA *ht_apDATA[max_Hdataairport];
-  init_ht_dataairport(ht_apDATA);
+  init_ht_dataairport(ht_apDATA, max_Hdataairport);
   charge_dataAirport(ht_apDATA);
   FILE *fp = fopen("../data/flights.csv", "r");
   if (fp != NULL) {

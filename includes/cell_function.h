@@ -18,4 +18,8 @@ struct cellule_airport* recherche_cellHT_airport(struct cellule_airport*, char*)
 
 struct cellule_compagnie* recherche_cellHT_compagnie(struct cellule_compagnie*, char*);
 
+//Fct recherche sur autres tables de hash
+
+struct cellule_airportDATA* recherche_cell_airport(struct cellule_airportDATA*, char*);
+
 
