@@ -1,20 +1,17 @@
 TARGET=main
-CFLAGS= -g -W -Wall -Wextra -MMD -02
-SRC=(wildcard src/*.c)
-OBJ=lib/$(SRC:.c=.o)
+CFLAGS= -g -W -Wall -Wextra -O2
+SRC=$(wildcard src/*.c)
+OBJ=$(SRC:.c=.o)
 
-$(shell mkdir -p lib)
-	
 default: $(TARGET)
 	
-.c.o:
-    gcc $(CFLAGS) -c $<
-	
+src/%.o: src/%.c
+	gcc $(CFLAGS) -c -o $@ $<
+
 $(TARGET): $(OBJ)
-    gcc $^ -o $@
-	
+	gcc $^ -o $@
+
 .PHONY: clean
-	
 clean:
-    rm -f lib/*.o
-    rm -f $(TARGET)
+	rm -f src/*.o
+	rm -f $(TARGET)
