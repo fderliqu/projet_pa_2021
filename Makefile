@@ -1,11 +1,13 @@
 TARGET=main
 CFLAGS= -g -W -Wall -Wextra -O2
 SRC=$(wildcard src/*.c)
-OBJ=$(SRC:.c=.o)
+OBJ=$(patsubst src/%.c, build/%.o, $(SRC))
 
 default: $(TARGET)
+
+$(shell mkdir -p build)
 	
-src/%.o: src/%.c
+build/%.o: src/%.c
 	gcc $(CFLAGS) -c -o $@ $<
 
 $(TARGET): $(OBJ)
@@ -13,5 +15,5 @@ $(TARGET): $(OBJ)
 
 .PHONY: clean
 clean:
-	rm -f src/*.o
+	rm -f build/*.o
 	rm -f $(TARGET)
