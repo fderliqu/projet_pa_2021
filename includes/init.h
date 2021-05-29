@@ -14,6 +14,11 @@
 #define max_Hdate 12 
 #define max_Hdataairport 17576 //26*26*26 possibilité
 
+#define timeON_limitON 	0x03
+#define timeON	0x02
+#define limitON 0x01
+#define timeOFF_limitOFF 0x00
+
 // Table airport
 
 struct airport {

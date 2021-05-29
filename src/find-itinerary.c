@@ -75,7 +75,7 @@ void find_itinerary(
 	struct cellule_airport* Buffairport;
     struct cellule_compagnie* Buffairline;
     struct cellule_vol_date* Buffvol;
-	if(!(mask & 0x02))time=-1;
+	if(!(mask & timeON))time=-1;
 	else if(time<0 || time>MAXlimit)
 	{
         suppr_tete_itinerary(pItinerary);
@@ -116,7 +116,7 @@ void find_itinerary(
                             ajout_tete_itinerary( pItinerary , Buffvol->vol , Buffairline->IATA_CODE );
                             print_itinerary(*pItinerary);
                             printf("\n");
-                            if(mask & 0x01)(*limit)--;
+                            if(mask & limitON)(*limit)--;
                             suppr_tete_itinerary(pItinerary);
                         }
                         else 
@@ -124,6 +124,8 @@ void find_itinerary(
                             if(Buffvol->vol.SCHED_DEP < Buffvol->vol.SCHED_ARR)
                             {
                                 ajout_tete_itinerary( pItinerary , Buffvol->vol , Buffairline->IATA_CODE );
+                                if(!(mask & limitON))mask = timeON; //si limit est desacctivée -> time on, limit off
+                                else mask = timeON_limitON; //sinon time and limit on
                                 find_itinerary(
                                     main_HT,
                                     pItinerary,
@@ -133,7 +135,7 @@ void find_itinerary(
                                     J,
                                     Buffvol->vol.SCHED_ARR,
                                     limit,
-                                    0x03
+                                    mask
                                 );
                             }
                         }

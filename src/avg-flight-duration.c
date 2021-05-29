@@ -42,5 +42,5 @@ void avg_flight_duration(struct cellule_airport *main_HT[max_Hairport], char ORG
             Buffairline = Buffairline->compagnie_suiv;
         }
     }
-    printf("average : %f minutes (%d flights)", somme_airtime/(float)nb_flight, nb_flight);
+    printf("average : %f minutes (%d flights)\n", somme_airtime/(float)nb_flight, nb_flight);
 }

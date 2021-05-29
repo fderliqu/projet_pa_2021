@@ -4,11 +4,13 @@
 #include "../includes/show-airport.h"
 #include "../includes/show-airlines.h"
 #include "../includes/show-flights.h"
+#include "../includes/avg-flight-duration.h"
+#include "../includes/find-initerary.h"
 
 int main() {
   struct cellule_airport *HT[max_Hairport];
   struct cellule_compagnieDATA *HTalData[max_Hdatacomp];
-  struct cellule_compagnieDATA *tmp;
+  //struct cellule_compagnieDATA *tmp;
   // Initialisation de la premiere table de hash (par aéroport de départ)
   init_ht_airport(HT);
   charge_vol(HT);
@@ -29,8 +31,13 @@ int main() {
       }
     }
   }*/
+  int limit=3, time=0;
+  char mask = timeON_limitON;
   show_airport(HT,"HA");
   show_airlines(HT,HTalData,"LAX");
-  show_flights(HT,"ATL",11,18,1200,10,0x03);//mask -> limit on (bit 0) / time on (bit 1)
+  show_flights(HT,"ATL",11,18,time,limit,mask);//mask -> limit on (bit 0) / time on (bit 1)
+  avg_flight_duration(HT,"LAX","SFO");
+  struct itinerary *liste = NULL;
+  find_itinerary(HT,&liste,"SFO","BUR",6,15,time,&limit,mask);
   printf("fin\n");
 }
