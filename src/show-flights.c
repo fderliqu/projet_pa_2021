@@ -60,7 +60,7 @@ void print_diverted_flight(struct cellule_vol_date* cell, char airline[SIZE_airl
 			);
 }
 
-void show_flights(struct cellule_airport *main_HT[max_Hairport], char AIRPORT[SIZE_airport], int M, int J, int time, int limit, char mask)
+void show_flights(struct cellule_airport *main_HT[max_Hairport], char AIRPORT[SIZE_acronym], int M, int J, int time, int limit, char mask)
 {
 	if(J<0 || J>31)
 	{
