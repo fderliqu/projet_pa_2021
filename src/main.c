@@ -2,6 +2,7 @@
 #include "../includes/cell_function.h"
 #include "../includes/charge_fichier.h"
 #include "../includes/show-airport.h"
+#include "../includes/show-airlines.h"
 
 int main() {
   struct cellule_airport *HT[max_Hairport];
@@ -28,4 +29,5 @@ int main() {
     }
   }*/
   show_airport(HT,"HA");
+  show_airlines(HT,HTalData,"LAX");
 }
