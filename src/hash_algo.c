@@ -43,14 +43,28 @@ void init_ht_date(struct cellule_vol_date *Ht_comp[max_Hdate]) {
   }
 }
 
-void init_ht_datacomp(struct cellule_compagnieDATA *Ht_comp[max_Hdatacomp]) {
-  for (int i = 0; i < max_Hdatacomp; i++) {
+void init_ht_datacomp(struct cellule_compagnieDATA *Ht_comp[], int size) {
+  for (int i = 0; i < size; i++) {
     Ht_comp[i] = NULL;
   }
 }
 
-void init_ht_dataairport(struct cellule_airportDATA *Ht_comp[max_Hdataairport]) {
-  for (int i = 0; i < max_Hdataairport; i++) {
+void init_ht_dataairport(struct cellule_airportDATA *Ht_comp[], int size) {
+  for (int i = 0; i < size; i++) {
     Ht_comp[i] = NULL;
   }
+}
+
+void desaloc_ht_dataairport(struct cellule_airportDATA *HT[], int sizeHT)
+{
+    struct cellule_airportDATA *tmp;
+    for(int i=0;i<sizeHT;i++)
+    {
+        while(HT[i]!=NULL)
+        {
+            tmp = HT[i];
+            HT[i] = tmp->suiv;
+            free(tmp);
+        }
+    }
 }

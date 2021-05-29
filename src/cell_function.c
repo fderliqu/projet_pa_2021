@@ -89,4 +89,14 @@ recherche_cellHT_compagnie(struct cellule_compagnie *pl,
   return recherche_cellHT_compagnie(pl->compagnie_suiv, str);
 }
 
-
+struct cellule_airportDATA *
+recherche_cell_airport(struct cellule_airportDATA *pl,
+                                char str[SIZE_acronym]) {
+  if ( pl == NULL ) {
+    return pl;
+  }
+  if (!strncmp(pl->data.IATA_CODE, str, SIZE_acronym)) {
+    return pl;
+  }
+  return recherche_cell_airport(pl->suiv, str);
+}
