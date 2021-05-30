@@ -33,14 +33,14 @@ void most_delay (struct liste *lc, struct vol vol)
         {
             lc->volaffiche[lc->dernier] = vol;
         }
-        while (cpt < (lc->dernier) - 1)
+        while (cpt < (lc->dernier) )
         {
             if (vol.ARR_DELAY < lc->volaffiche[cpt].ARR_DELAY)
             {
                 buff                = lc->volaffiche[cpt];
                 lc->volaffiche[cpt] = vol;
                 cpt++;
-                while (cpt < lc->dernier)
+                while (cpt <= lc->dernier)
                 {
                     lc->volaffiche[lc->dernier] = lc->volaffiche[cpt];
                     lc->volaffiche[cpt]         = buff;
