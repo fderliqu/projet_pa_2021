@@ -9,7 +9,7 @@
 struct cellule_comp
 {
     float retardtotal;
-    int   nbvol;
+    float nbvol;
     float moyenne;
 };
 
@@ -34,7 +34,7 @@ void ajout_moyenne (struct cellule_comp tablecomp[max_Hdatacomp], struct vol vol
 {
     tablecomp[index].nbvol++;
     tablecomp[index].retardtotal += vol.ARR_DELAY;
-    // printf("%f   %d \n ", tablecomp[index].retardtotal, tablecomp[index].nbvol);
+    // printf("%f   %f \n ", tablecomp[index].retardtotal, tablecomp[index].nbvol);
 }
 
 
@@ -59,23 +59,19 @@ void affichemax (struct liste *lmax, struct cellule_comp tablecomp[max_Hdatacomp
     int buff, buff2, cpt;
     cpt = 0;
 
-    tablecomp[cpttab].moyenne = (tablecomp[cpttab].retardtotal / tablecomp[cpttab].nbvol + 1);
+    tablecomp[cpttab].moyenne = (tablecomp[cpttab].retardtotal / (tablecomp[cpttab].nbvol + 1));
     // printf("tablcomp moyenne %f  \n", tablecomp[cpttab].moyenne);
-
+    // printf("dernier %d  \n", lmax->dernier);
     // initialisation de la liste
     if (lmax->dernier < max - 1)
     {
         lmax->dernier++;
-        if (lmax->dernier == 0)
-        {
-            lmax->maxIATA[lmax->dernier] = cpttab;
-            return;
-        }
+
         if (tablecomp[cpttab].moyenne > tablecomp[lmax->maxIATA[(lmax->dernier) - 1]].moyenne)
         {
             lmax->maxIATA[lmax->dernier] = cpttab;
         }
-        while (cpt < lmax->dernier - 1)
+        while (cpt < lmax->dernier)
         {
 
             if (tablecomp[cpttab].moyenne < tablecomp[lmax->maxIATA[cpt]].moyenne)
@@ -83,7 +79,7 @@ void affichemax (struct liste *lmax, struct cellule_comp tablecomp[max_Hdatacomp
                 buff               = lmax->maxIATA[cpt];
                 lmax->maxIATA[cpt] = cpttab;
                 cpt++;
-                while (cpt < lmax->dernier)
+                while (cpt <= lmax->dernier)
                 {
                     lmax->maxIATA[lmax->dernier] = lmax->maxIATA[cpt];
                     lmax->maxIATA[cpt]           = buff;
@@ -92,6 +88,10 @@ void affichemax (struct liste *lmax, struct cellule_comp tablecomp[max_Hdatacomp
                 }
             }
             cpt++;
+        }
+        if (lmax->dernier == 0)
+        {
+            lmax->maxIATA[lmax->dernier] = cpttab;
         }
         return;
     }
@@ -123,7 +123,7 @@ void affichemax (struct liste *lmax, struct cellule_comp tablecomp[max_Hdatacomp
     }
 }
 
-void show_most_delayed_flights (struct cellule_airport *      Htable_airport[max_Hairport],
+void show_most_delayed_airline (struct cellule_airport *      Htable_airport[max_Hairport],
                                 struct cellule_compagnieDATA *NAMEcomp[max_Hdatacomp])
 {
 
@@ -166,7 +166,10 @@ void show_most_delayed_flights (struct cellule_airport *      Htable_airport[max
                             {
                                 if (Buffvol->vol.CANCELLED != 1 && Buffvol->vol.DIVERTED != 1)
                                 {
-                                    ajout_moyenne (tablecomp, Buffvol->vol, indexcomp);
+                                    if (Buffvol->vol.ARR_DELAY > 0)
+                                    {
+                                        ajout_moyenne (tablecomp, Buffvol->vol, indexcomp);
+                                    }
                                 }
                                 Buffvol = Buffvol->vol_suiv;
                             }
@@ -186,6 +189,8 @@ void show_most_delayed_flights (struct cellule_airport *      Htable_airport[max
         if (tablecomp[cpttab].nbvol != -1)
         {
             affichemax (&lmax, tablecomp, cpttab);
+            // afficheliste(&lmax, tablecomp, NAMEcomp);
+            // printf("----------------------------\n");
         }
         cpttab++;
     }
