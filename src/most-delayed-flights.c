@@ -3,15 +3,14 @@
 #include "../includes/charge_fichier.h"
 #include "../includes/most-delayed-flights.h"
 
-
-void afficheliste(struct liste *lc)
+void afficheliste(struct liste lc)
 {
-	int cpt = lc->dernier;
+	int cpt = lc.dernier;
 	while (cpt >= 0)
 	{
-		printf("%d %d %d %s %s ", lc->volaffiche[cpt].DAY, lc->volaffiche[cpt].MONTH, lc->volaffiche[cpt].WEEKDAY, lc->volaffiche[cpt].ORG_AIR, lc->volaffiche[cpt].DEST_AIR);
-		printf("%d %f %f %d %d ", lc->volaffiche[cpt].SCHED_DEP, lc->volaffiche[cpt].DEP_DELAY, lc->volaffiche[cpt].AIR_TIME, lc->volaffiche[cpt].DIST, lc->volaffiche[cpt].SCHED_ARR);
-		printf("%f %d %d \n", lc->volaffiche[cpt].ARR_DELAY, lc->volaffiche[cpt].DIVERTED, lc->volaffiche[cpt].CANCELLED);
+		printf("%d %d %d %s %s ", lc.volaffiche[cpt].DAY, lc.volaffiche[cpt].MONTH, lc.volaffiche[cpt].WEEKDAY, lc.volaffiche[cpt].ORG_AIR, lc.volaffiche[cpt].DEST_AIR);
+		printf("%d %f %f %d %d ", lc.volaffiche[cpt].SCHED_DEP, lc.volaffiche[cpt].DEP_DELAY, lc.volaffiche[cpt].AIR_TIME, lc.volaffiche[cpt].DIST, lc.volaffiche[cpt].SCHED_ARR);
+		printf("%f %d %d \n", lc.volaffiche[cpt].ARR_DELAY, lc.volaffiche[cpt].DIVERTED, lc.volaffiche[cpt].CANCELLED);
 	}
 
 }
@@ -49,7 +48,6 @@ void most_delay(struct liste *lc, struct vol vol)
 		}
 		return;
 	}
-
 	if (vol.ARR_DELAY < lc->volaffiche[0].ARR_DELAY) { return; }
 	//parcours de la liste
 	cpt = 1;
@@ -82,40 +80,43 @@ void show_most_delayed_flights(struct cellule_airport *Htable_airport[max_Hairpo
 	struct cellule_vol_date* Buffvol;
 	struct liste lc;
 	lc.dernier = -1;
-
-	printf("Voici les 5 vols qui on subis le plus longs retard a l'arrivé : \n");
+	int compt=0;
+	printf("Voici les 5 vols qui on subis le plus longs retard a l'arrivï¿½ : \n");
 	//parcours des airport
-	for(cpt_airport = 0; cpt_airport <= max_Hairport; cpt_airport++)
+	for(cpt_airport = 0; cpt_airport < max_Hairport; cpt_airport++)
 	{
-		// parcours de la liste chainer des airports
+		// parcours de la liste chainÃ©e des airports
 		Buffairport = Htable_airport[cpt_airport];
 		while (Buffairport != NULL)
 		{
-			//parcours de la Htable des compagnie
-		
-			for (cpt_airline = 0; cpt_airline <= max_Hcomp; cpt_airline++)
+			if(Buffairport->is_empty != 1)
 			{
-				Buffcomp = Buffairport->pt_Htable_compagnie[cpt_airline];
-				while (Buffcomp != NULL)
+				//parcours de la Htable des compagnie
+				for (cpt_airline = 0; cpt_airline < max_Hcomp; cpt_airline++)
 				{
-					for (cpt_date = 0; cpt_date <= max_Hdate; cpt_date++)
+					Buffcomp = Buffairport->pt_Htable_compagnie[cpt_airline];
+					while (Buffcomp != NULL)
 					{
+						for (cpt_date = 0; cpt_date < max_Hdate; cpt_date++)
+						{
 							Buffvol = Buffcomp->pt_Htable_date[cpt_date];
 							while (Buffvol != NULL)
 							{
-                                if (Buffvol->vol.CANCELLED != 1 && Buffvol->vol.DIVERTED != 1)
-                                {
-                                    most_delay (&lc, Buffvol->vol);
-                                }
+                            	if ( (Buffvol->vol.CANCELLED == 0) && (Buffvol->vol.DIVERTED == 0) )
+                            	{
+									compt++;
+									printf("%d ",compt);
+                                	most_delay(&lc, Buffvol->vol);
+                            	}
 								Buffvol = Buffvol->vol_suiv;
 							}
-
+						}
+						Buffcomp = Buffcomp->compagnie_suiv;
 					}
-					Buffcomp = Buffcomp->compagnie_suiv;
 				}
 			}
 			Buffairport = Buffairport->airport_suiv;
 		}
 	}
-	afficheliste(&lc);
+	afficheliste(lc);
 }
