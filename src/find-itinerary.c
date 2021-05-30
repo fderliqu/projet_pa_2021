@@ -6,19 +6,19 @@
 #define MAXlimit 2359
 
 
-void suppr_tete_itinerary(struct itinerary** pL)
+void suppr_tete_itinerary(struct cellule_vol** pL)
 {
     if(*pL == NULL)return;
-    struct itinerary *tmp;
+    struct cellule_vol *tmp;
     tmp = *pL;
     *pL = tmp->suiv;
     free(tmp);
 }
 
-void ajout_tete_itinerary(struct itinerary** pL, struct vol data, char airline[SIZE_airline_acro])
+void ajout_tete_itinerary(struct cellule_vol** pL, struct vol data, char airline[SIZE_airline_acro])
 {
-    struct itinerary *new;
-    new = malloc(sizeof(struct itinerary));
+    struct cellule_vol *new;
+    new = malloc(sizeof(struct cellule_vol));
     new->data = data;
     strncpy(new->airline,airline,SIZE_airline_acro);
     new->suiv = *pL;
@@ -26,33 +26,18 @@ void ajout_tete_itinerary(struct itinerary** pL, struct vol data, char airline[S
     return;
 }
 
-void print_itinerary(struct itinerary* L)
+void print_itinerary(struct cellule_vol* L)
 {
 
     if(L!=NULL)print_itinerary(L->suiv);
     else return;
-	printf	("%d,%d,%d,%s,%s,%s,%d,%.2f,%.2f,%d,%d,%.2f,%hd,%hd\n",
-	    	L->data.MONTH,
-		    L->data.DAY,
-		    L->data.WEEKDAY,
-	    	L->airline,
-	    	L->data.ORG_AIR,
-	    	L->data.DEST_AIR,
-	    	L->data.SCHED_DEP,
-	    	L->data.DEP_DELAY,
-	    	L->data.AIR_TIME,
-	    	L->data.DIST,
-	    	L->data.SCHED_ARR,
-	    	L->data.ARR_DELAY,
-	    	L->data.DIVERTED,
-	    	L->data.CANCELLED
-	    	);
+	print_data_cellule_vol(L);
     return;
 }
 
 void find_itinerary(   
     struct cellule_airport *main_HT[max_Hairport], 
-    struct itinerary** pItinerary,
+    struct cellule_vol** pItinerary,
     char ORG_AIR[SIZE_acronym], 
     char DEST_AIR[SIZE_acronym],
     int M,

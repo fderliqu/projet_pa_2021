@@ -6,6 +6,7 @@
 #include "../includes/show-flights.h"
 #include "../includes/avg-flight-duration.h"
 #include "../includes/find-initerary.h"
+#include "../includes/most-delayed-flights.h"
 
 int main() {
   struct cellule_airport *HT[max_Hairport];
@@ -37,7 +38,8 @@ int main() {
   show_airlines(HT,HTalData,"LAX");
   show_flights(HT,"ATL",11,18,time,limit,mask);//mask -> limit on (bit 0) / time on (bit 1)
   avg_flight_duration(HT,"LAX","SFO");
-  struct itinerary *liste = NULL;
+  struct cellule_vol *liste = NULL;
   find_itinerary(HT,&liste,"SFO","BUR",6,15,time,&limit,mask);
+  show_most_delayed_flights(HT);
   printf("fin\n");
 }

@@ -100,3 +100,25 @@ recherche_cell_airport(struct cellule_airportDATA *pl,
   }
   return recherche_cell_airport(pl->suiv, str);
 }
+
+//fct print
+
+
+void print_data_cellule_vol(struct cellule_vol* Buff_vol)
+{
+  printf( "%d,%d,%d,%s,%s,%s,%d,%.2f,%.2f,%d,%d,%.2f,%hd,%hd\n",Buff_vol->data.MONTH, 
+                                                            Buff_vol->data.DAY,
+                                                            Buff_vol->data.WEEKDAY,
+                                                            Buff_vol->airline,
+                                                            Buff_vol->data.ORG_AIR,
+                                                            Buff_vol->data.DEST_AIR,
+                                                            Buff_vol->data.SCHED_DEP,
+                                                            Buff_vol->data.DEP_DELAY,
+                                                            Buff_vol->data.AIR_TIME,
+                                                            Buff_vol->data.DIST,
+                                                            Buff_vol->data.SCHED_ARR,
+                                                            Buff_vol->data.ARR_DELAY,
+                                                            Buff_vol->data.DIVERTED,
+                                                            Buff_vol->data.CANCELLED
+    );
+}

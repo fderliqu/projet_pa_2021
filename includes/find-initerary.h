@@ -1,6 +1,6 @@
 void find_itinerary(   
     struct cellule_airport**, 
-    struct itinerary**,
+    struct cellule_vol**,
     char*, 
     char*,
     int,

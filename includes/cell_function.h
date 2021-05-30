@@ -22,4 +22,10 @@ struct cellule_compagnie* recherche_cellHT_compagnie(struct cellule_compagnie*, 
 
 struct cellule_airportDATA* recherche_cell_airport(struct cellule_airportDATA*, char*);
 
+//fct print
+
+void print_data_cellule_vol(struct cellule_vol* );
+
+
+
 

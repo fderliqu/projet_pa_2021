@@ -91,8 +91,8 @@ struct cellule_vol_date
 
 //struct cellule_vol_date* Htable_date[max_Hdate];
 
-struct itinerary{
+struct cellule_vol{
     struct vol data;
     char airline[SIZE_airline_acro];
-    struct itinerary* suiv;
+    struct cellule_vol* suiv;
 };
