@@ -43,6 +43,64 @@ void suppr_fin_delayed(struct cellule_vol** pL)
 	suppr_fin_delayed( &((*pL)->suiv) );
 }
 
+/*
+void most_delay(struct liste *lc, struct vol vol)
+{
+	int cpt = 0;
+	struct vol buff;
+	//initialisation de la liste
+    if (lc->dernier < maxmostflights)
+	{
+		lc->dernier++;
+		while (cpt < lc->dernier - 1)
+		{
+			if (vol.ARR_DELAY > lc->volaffiche[(lc->dernier) - 1].ARR_DELAY)
+			{
+				lc->volaffiche[lc->dernier] = vol;
+			}
+			else if (vol.ARR_DELAY < lc->volaffiche[cpt].ARR_DELAY)
+			{
+				buff = lc->volaffiche[cpt];
+				lc->volaffiche[cpt] = vol;
+			}
+			else
+			{
+				lc->volaffiche[lc->dernier] = lc->volaffiche[cpt];
+				lc->volaffiche[cpt] = buff;
+				buff = lc->volaffiche[lc->dernier];
+			}
+			cpt++;
+		}
+		if (lc->dernier == 0)
+		{
+			lc->volaffiche[lc->dernier] = vol;
+		}
+		return;
+	}
+	if (vol.ARR_DELAY < lc->volaffiche[0].ARR_DELAY) { return; }
+	//parcours de la liste
+	cpt = 1;
+    while (cpt < maxmostflights)
+	{
+		if (vol.ARR_DELAY < lc->volaffiche[cpt].ARR_DELAY) { break; }
+		cpt++;
+	}
+	//modification de la liste 
+	buff = lc->volaffiche[cpt-1];
+	lc->volaffiche[cpt-1] = vol;
+	cpt--;
+
+	while (cpt >= 0)
+	{
+		vol = lc->volaffiche[cpt];
+		lc->volaffiche[cpt] = buff;
+		buff = vol;
+		cpt--;
+	}
+
+}
+*/
+
 void show_most_delayed_flights(struct cellule_airport *Htable_airport[max_Hairport])
 {
 	int cpt_airport,cpt_airline,cpt_date;
