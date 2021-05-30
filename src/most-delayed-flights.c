@@ -1,9 +1,8 @@
-#define max 5;
+#include "../includes/hash_algo.h"
+#include "../includes/cell_function.h"
+#include "../includes/charge_fichier.h"
+#include "../includes/most-delayed-flights.h"
 
-struct liste {
-	struct vol volaffiche[max];
-	int dernier;
-};
 
 void afficheliste(struct liste *lc)
 {
@@ -22,7 +21,7 @@ void most_delay(struct liste *lc, struct vol vol)
 	int cpt = 0;
 	struct vol buff;
 	//initialisation de la liste
-	if (lc->dernier < max)
+    if (lc->dernier < maxmostflights)
 	{
 		lc->dernier++;
 		while (cpt < lc->dernier - 1)
@@ -54,7 +53,7 @@ void most_delay(struct liste *lc, struct vol vol)
 	if (vol.ARR_DELAY < lc->volaffiche[0].ARR_DELAY) { return; }
 	//parcours de la liste
 	cpt = 1;
-	while (cpt < max)
+    while (cpt < maxmostflights)
 	{
 		if (vol.ARR_DELAY < lc->volaffiche[cpt].ARR_DELAY) { break; }
 		cpt++;
@@ -104,7 +103,10 @@ void show_most_delayed_flights(struct cellule_airport *Htable_airport[max_Hairpo
 							Buffvol = Buffcomp->pt_Htable_date[cpt_date];
 							while (Buffvol != NULL)
 							{
-								most_delay(&lc, Buffvol->vol);
+                                if (Buffvol->vol.CANCELLED != 1 && Buffvol->vol.DIVERTED != 1)
+                                {
+                                    most_delay (&lc, Buffvol->vol);
+                                }
 								Buffvol = Buffvol->vol_suiv;
 							}
 
