@@ -26,6 +26,8 @@ struct cellule_airportDATA* recherche_cell_airport(struct cellule_airportDATA*, 
 
 void print_data_cellule_vol(struct cellule_vol* );
 
+void print_normal_flight(struct cellule_vol_date*, char*);
 
+void print_cancelled_flight(struct cellule_vol_date*, char*);
 
-
+void print_diverted_flight(struct cellule_vol_date*, char*);

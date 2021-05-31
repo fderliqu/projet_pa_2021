@@ -122,3 +122,58 @@ void print_data_cellule_vol(struct cellule_vol* Buff_vol)
                                                             Buff_vol->data.CANCELLED
     );
 }
+
+void print_normal_flight(struct cellule_vol_date* cell, char airline[SIZE_airline_acro])
+{
+	printf	("%d,%d,%d,%s,%s,%s,%d,%f,%f,%d,%d,%f,%hd,%hd\n",
+			cell->vol.MONTH,
+			cell->vol.DAY,
+			cell->vol.WEEKDAY,
+			airline,
+			cell->vol.ORG_AIR,
+			cell->vol.DEST_AIR,
+			cell->vol.SCHED_DEP,
+			cell->vol.DEP_DELAY,
+			cell->vol.AIR_TIME,
+			cell->vol.DIST,
+			cell->vol.SCHED_ARR,
+			cell->vol.ARR_DELAY,
+			cell->vol.DIVERTED,
+			cell->vol.CANCELLED
+			);
+}
+
+void print_cancelled_flight(struct cellule_vol_date* cell, char airline[SIZE_airline_acro])
+{
+	printf	("%d,%d,%d,%s,%s,%s,%d,%d,%d,%hd,%hd\n",
+			cell->vol.MONTH,
+			cell->vol.DAY,
+			cell->vol.WEEKDAY,
+			airline,
+			cell->vol.ORG_AIR,
+			cell->vol.DEST_AIR,
+			cell->vol.SCHED_DEP,
+			cell->vol.DIST,
+			cell->vol.SCHED_ARR,
+			cell->vol.DIVERTED,
+			cell->vol.CANCELLED
+			);
+}
+
+void print_diverted_flight(struct cellule_vol_date* cell, char airline[SIZE_airline_acro])
+{
+	printf	("%d,%d,%d,%s,%s,%s,%d,%f,%d,%d,%hd,%hd\n",
+			cell->vol.MONTH,
+			cell->vol.DAY,
+			cell->vol.WEEKDAY,
+			airline,
+			cell->vol.ORG_AIR,
+			cell->vol.DEST_AIR,
+			cell->vol.SCHED_DEP,
+			cell->vol.DEP_DELAY,
+			cell->vol.DIST,
+			cell->vol.SCHED_ARR,
+			cell->vol.DIVERTED,
+			cell->vol.CANCELLED
+			);
+}
