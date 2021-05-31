@@ -1,11 +1,12 @@
+#include "../includes/init.h"
+#include "../includes/hash_algo.h"
 #include "../includes/cell_function.h"
 #include "../includes/charge_fichier.h"
-#include "../includes/hash_algo.h"
-
+#include "../includes/main_function.h"
 
 #include "../includes/most-delayed-flights.h"
 
-void afficheliste (struct liste *lc)
+void affichelisteflights (struct liste_delayed_flights*lc)
 {
     int cpt = lc->dernier;
     while (cpt >= 0)
@@ -22,12 +23,12 @@ void afficheliste (struct liste *lc)
     }
 }
 
-void most_delay (struct liste *lc, struct vol vol, char IATA[SIZE_airline_acro])
+void most_delay (struct liste_delayed_flights*lc, struct vol vol, char IATA[SIZE_airline_acro],int maxflights)
 {
     int             cpt = 0;
     struct vol_IATA buff, buff2;
     // initialisation de la liste
-    if (lc->dernier < maxmostflights - 1)
+    if (lc->dernier < maxflights - 1)
     {
         lc->dernier++;
         if (vol.ARR_DELAY > lc->volaffiche[(lc->dernier) - 1].vol.ARR_DELAY)
@@ -66,7 +67,7 @@ void most_delay (struct liste *lc, struct vol vol, char IATA[SIZE_airline_acro])
     }
     // parcours de la liste
     cpt = 1;
-    while (cpt < maxmostflights)
+    while (cpt < maxflights)
     {
         if (vol.ARR_DELAY < lc->volaffiche[cpt].vol.ARR_DELAY)
         {
@@ -89,13 +90,13 @@ void most_delay (struct liste *lc, struct vol vol, char IATA[SIZE_airline_acro])
 }
 
 
-void show_most_delayed_flights (struct cellule_airport *Htable_airport[max_Hairport])
+void show_most_delayed_flights (struct cellule_airport *Htable_airport[max_Hairport],int maxflights)
 {
     int                       cpt_airport, cpt_airline, cpt_date;
     struct cellule_airport *  Buffairport;
     struct cellule_compagnie *Buffcomp;
     struct cellule_vol_date * Buffvol;
-    struct liste              lc;
+    struct liste_delayed_flights              lc;
     lc.dernier = -1;
 
     printf ("Voici les 5 vols qui on subis le plus longs retard a l'arrivee : \n \n");
@@ -122,7 +123,7 @@ void show_most_delayed_flights (struct cellule_airport *Htable_airport[max_Hairp
                             {
                                 if (Buffvol->vol.CANCELLED != 1 && Buffvol->vol.DIVERTED != 1)
                                 {
-                                    most_delay (&lc, Buffvol->vol, Buffcomp->IATA_CODE);
+                                    most_delay (&lc, Buffvol->vol, Buffcomp->IATA_CODE, maxflights);
                                 }
                                 Buffvol = Buffvol->vol_suiv;
                             }
@@ -134,5 +135,5 @@ void show_most_delayed_flights (struct cellule_airport *Htable_airport[max_Hairp
             Buffairport = Buffairport->airport_suiv;
         }
     }
-    afficheliste (&lc);
+    affichelisteflights(&lc);
 }
