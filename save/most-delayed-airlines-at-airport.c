@@ -54,6 +54,11 @@ void affichemaxat(struct liste_most_airline_at_airport* lmax, struct cellule_com
     {
         lmax->dernier++;
 
+        if (lmax->dernier == 0)
+        {
+            lmax->maxIATA[lmax->dernier] = cpttab;
+            return;
+        }
         if (tablecomp[cpttab].moyenne > tablecomp[lmax->maxIATA[(lmax->dernier) - 1]].moyenne)
         {
             lmax->maxIATA[lmax->dernier] = cpttab;
@@ -75,10 +80,6 @@ void affichemaxat(struct liste_most_airline_at_airport* lmax, struct cellule_com
                 }
             }
             cpt++;
-        }
-        if (lmax->dernier == 0)
-        {
-            lmax->maxIATA[lmax->dernier] = cpttab;
         }
         return;
     }
