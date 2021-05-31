@@ -25,3 +25,11 @@ void init_ht_dataairport(struct cellule_airportDATA **, int);
 //Fct désalloc de table de hash
 
 void desaloc_ht_dataairport(struct cellule_airportDATA**, int);
+
+void desaloc_ht_dataairline(struct cellule_compagnieDATA**, int);
+
+void desaloc_ht_airport(struct cellule_airport**);
+
+void desaloc_ht_airline(struct cellule_compagnie**);
+
+void desaloc_ht_vol(struct cellule_vol_date**);

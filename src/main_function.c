@@ -6,6 +6,11 @@
 #include "../includes/avg-flight-duration.h"
 #include "../includes/find-initerary.h"
 #include "../includes/most-delayed-flights.h"
+#include "../includes/most_delayed_airlines.h"
+#include "../includes/most-delayed-airlines-at-airport.h"
+#include"../includes/delayed-airline-airline_id.h"
+#include"../includes/changed-flights.h"
+#include"../includes/quit.h"
 
 int dichotomie(char *l_fct[max_function_lenght], char fct[max_function_lenght])
 {
@@ -58,8 +63,18 @@ void launch_function(struct line_arguments liste, struct cellule_airport *HT_mai
   int index = dichotomie(l_fct,liste.arg[0]);
   //*(functions[index])(arg);
   switch (index){
+    case 0: init_avg_flight_duration(liste,HT_main); break;
+    case 1: init_changed_flights(liste,HT_main); break;
+    case 2: init_delayed_airlines(liste,HT_main); break;
+    case 3: init_find_itinerary(liste,HT_main); break;
+
+    case 5: init_most_delayed_airlines(liste,HT_main,HT_comp_data); break;
+    case 6: init_show_most_delayed_airline_at_airport(liste,HT_main,HT_comp_data) ; break;
+    case 7: init_most_delayed_flights(liste,HT_main); break;
+    case 8: quit(HT_main,HT_comp_data);return; break;
     case 9: init_show_airlines(liste,HT_main,HT_comp_data); break;
     case 10: init_show_airport(liste,HT_main); break;
+    case 11: init_show_flights(liste,HT_main); break;
     default:    
         printf("Error: Can't find the function %s \n",liste.arg[0]);
         break;
