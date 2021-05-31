@@ -70,3 +70,63 @@ void desaloc_ht_dataairport(struct cellule_airportDATA *HT[], int sizeHT)
         }
     }
 }
+
+void desaloc_ht_dataairline(struct cellule_compagnieDATA *HT[], int sizeHT)
+{
+    struct cellule_compagnieDATA *tmp;
+    for(int i=0;i<sizeHT;i++)
+    {
+        while(HT[i]!=NULL)
+        {
+            tmp = HT[i];
+            HT[i] = tmp->compagnie_suiv;
+            free(tmp);
+        }
+    }
+}
+
+
+void desaloc_ht_airport(struct cellule_airport *HT[max_Hairport])
+{
+    struct cellule_airport *tmp;
+    for(int i=0;i<max_Hairport;i++)
+    {
+        while(HT[i]!=NULL)
+        {
+            tmp = HT[i];
+            HT[i] = tmp->airport_suiv;
+            free(tmp);
+        }
+    }
+}
+
+void desaloc_ht_airline(struct cellule_compagnie *HT[max_Hcomp])
+{
+    struct cellule_compagnie *tmp;
+    for(int i=0;i<max_Hcomp;i++)
+    {
+        while(HT[i]!=NULL)
+        {
+            tmp = HT[i];
+            HT[i] = tmp->compagnie_suiv;
+            free(tmp);
+        }
+    }
+}
+
+void desaloc_ht_vol(struct cellule_vol_date *HT[max_Hdate])
+{
+    struct cellule_vol_date *tmp;
+    for(int i=0;i<max_Hdate;i++)
+    {
+        while(HT[i]!=NULL)
+        {
+            tmp = HT[i];
+            HT[i] = tmp->vol_suiv;
+            free(tmp);
+        }
+    }
+}
+
+
+
