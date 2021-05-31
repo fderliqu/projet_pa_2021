@@ -5,40 +5,43 @@
 
 #include "../includes/most-delayed-flights.h"
 
-
 void afficheliste (struct liste *lc)
 {
     int cpt = lc->dernier;
     while (cpt >= 0)
     {
-        printf ("%d %d %d %s %s ", lc->volaffiche[cpt].DAY, lc->volaffiche[cpt].MONTH,
-                lc->volaffiche[cpt].WEEKDAY, lc->volaffiche[cpt].ORG_AIR, lc->volaffiche[cpt].DEST_AIR);
-        printf ("%d %f %f %d %d ", lc->volaffiche[cpt].SCHED_DEP, lc->volaffiche[cpt].DEP_DELAY,
-                lc->volaffiche[cpt].AIR_TIME, lc->volaffiche[cpt].DIST, lc->volaffiche[cpt].SCHED_ARR);
-        printf ("%f %hd %hd \n", lc->volaffiche[cpt].ARR_DELAY, lc->volaffiche[cpt].DIVERTED,
-                lc->volaffiche[cpt].CANCELLED);
+        printf ("%d %d %d %s %s %s ", lc->volaffiche[cpt].vol.DAY, lc->volaffiche[cpt].vol.MONTH,
+                lc->volaffiche[cpt].vol.WEEKDAY, lc->volaffiche[cpt].IATA_AIRLINE,
+                (lc->volaffiche[cpt].vol).ORG_AIR, lc->volaffiche[cpt].vol.DEST_AIR);
+        printf ("%d %f %f %d %d ", lc->volaffiche[cpt].vol.SCHED_DEP,
+                lc->volaffiche[cpt].vol.DEP_DELAY, lc->volaffiche[cpt].vol.AIR_TIME,
+                lc->volaffiche[cpt].vol.DIST, lc->volaffiche[cpt].vol.SCHED_ARR);
+        printf ("%f %hd %hd \n", lc->volaffiche[cpt].vol.ARR_DELAY,
+                lc->volaffiche[cpt].vol.DIVERTED, lc->volaffiche[cpt].vol.CANCELLED);
         cpt--;
     }
 }
 
-void most_delay (struct liste *lc, struct vol vol)
+void most_delay (struct liste *lc, struct vol vol, char IATA[SIZE_airline_acro])
 {
-    int        cpt = 0;
-    struct vol buff;
+    int             cpt = 0;
+    struct vol_IATA buff, buff2;
     // initialisation de la liste
     if (lc->dernier < maxmostflights - 1)
     {
         lc->dernier++;
-        if (vol.ARR_DELAY > lc->volaffiche[(lc->dernier) - 1].ARR_DELAY)
+        if (vol.ARR_DELAY > lc->volaffiche[(lc->dernier) - 1].vol.ARR_DELAY)
         {
-            lc->volaffiche[lc->dernier] = vol;
+            lc->volaffiche[lc->dernier].vol = vol;
+            strcpy (lc->volaffiche[lc->dernier].IATA_AIRLINE, IATA);
         }
-        while (cpt < (lc->dernier) )
+        while (cpt < (lc->dernier))
         {
-            if (vol.ARR_DELAY < lc->volaffiche[cpt].ARR_DELAY)
+            if (vol.ARR_DELAY < lc->volaffiche[cpt].vol.ARR_DELAY)
             {
-                buff                = lc->volaffiche[cpt];
-                lc->volaffiche[cpt] = vol;
+                buff                    = lc->volaffiche[cpt];
+                lc->volaffiche[cpt].vol = vol;
+                strcpy (lc->volaffiche[cpt].IATA_AIRLINE, IATA);
                 cpt++;
                 while (cpt <= lc->dernier)
                 {
@@ -52,11 +55,12 @@ void most_delay (struct liste *lc, struct vol vol)
         }
         if (lc->dernier == 0)
         {
-            lc->volaffiche[lc->dernier] = vol;
+            lc->volaffiche[lc->dernier].vol = vol;
+            strcpy (lc->volaffiche[lc->dernier].IATA_AIRLINE, IATA);
         }
         return;
     }
-    if (vol.ARR_DELAY < lc->volaffiche[0].ARR_DELAY)
+    if (vol.ARR_DELAY < lc->volaffiche[0].vol.ARR_DELAY)
     {
         return;
     }
@@ -64,21 +68,22 @@ void most_delay (struct liste *lc, struct vol vol)
     cpt = 1;
     while (cpt < maxmostflights)
     {
-        if (vol.ARR_DELAY < lc->volaffiche[cpt].ARR_DELAY)
+        if (vol.ARR_DELAY < lc->volaffiche[cpt].vol.ARR_DELAY)
         {
             break;
         }
         cpt++;
     }
     // modification de la liste
-    buff                    = lc->volaffiche[cpt - 1];
-    lc->volaffiche[cpt - 1] = vol;
-    cpt                     = cpt - 2;
+    buff                        = lc->volaffiche[cpt - 1];
+    lc->volaffiche[cpt - 1].vol = vol;
+    strcpy (lc->volaffiche[cpt - 1].IATA_AIRLINE, IATA);
+    cpt = cpt - 2;
     while (cpt >= 0)
     {
-        vol                 = lc->volaffiche[cpt];
+        buff2               = lc->volaffiche[cpt];
         lc->volaffiche[cpt] = buff;
-        buff                = vol;
+        buff                = buff2;
         cpt--;
     }
 }
@@ -117,7 +122,7 @@ void show_most_delayed_flights (struct cellule_airport *Htable_airport[max_Hairp
                             {
                                 if (Buffvol->vol.CANCELLED != 1 && Buffvol->vol.DIVERTED != 1)
                                 {
-                                    most_delay (&lc, Buffvol->vol);
+                                    most_delay (&lc, Buffvol->vol, Buffcomp->IATA_CODE);
                                 }
                                 Buffvol = Buffvol->vol_suiv;
                             }
