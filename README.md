@@ -33,11 +33,11 @@ Ce depot contient dans la branche master differents répertoires dans les quelle
 	- ` show-flights.h ` : Declaration des fonctions associer au .c du meme nom.
 
 - **src** :
-	- `avg-flight-duration.c : **requet** requet du meme nom.
+	- `avg-flight-duration.c `: **requet** requet du meme nom.
 	- `cell_function.c` : fichier qui contient les fonctions permetant de rechercher et de modifier notre structures de données.
 	- ` changed-flights.c` : **requet** requet du meme nom.
 	- ` charge_fichier.c ` : fichier qui contient les fonctions permetant d'extraire les donnés des fichiers et de les placer dans notre base de données. 
-	- ` condition_function.c : fichier contenant les condition permetant d'eviter des erreurs de saisi de l'utilisateur.
+	- ` condition_function.c ` : fichier contenant les condition permetant d'eviter des erreurs de saisi de l'utilisateur.
 	- ` delayed-airline-airline_id.c ` : **requet** requet du meme nom.
 	- ` find-initerary.c` : **requet** requet du meme nom.
 	- ` hash_algo.c` : fichier contenant les fonctions de hachage de nos differentes tables de hachage.
@@ -51,3 +51,11 @@ Ce depot contient dans la branche master differents répertoires dans les quelle
 	- ` show-airport.c ` : **requet** requet du meme nom.
 	- ` show-flights.c ` : **requet** requet du meme nom.
 	- ` test.c ` : fichier contenant nos tests de fonction.
+
+- Pour finir :
+	- **Makefile** :  Fichier permetant la compilation automatique
+	- **Rapport.pdf** :  Compte-rendu du projet 
+	- **.clang-format ** :  fichier contenant les regles de formatage du langage C
+
+## COMPILATION
+	la compilation est a realiser la premiere fois que l'utilisateur recupère les fichiers
