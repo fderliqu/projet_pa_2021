@@ -30,4 +30,24 @@ Ce depot contient dans la branche master differents répertoires dans les quelle
 	- ` quit.h ` :   Declaration de la fonction associer au .c du meme nom.
 	- ` show-airlines.h` : Declaration de la fonction associer au .c du meme nom.
 	- ` show-airport.h ` : Declaration de la fonction associer au .c du meme nom.
-	- ` show-flights.h: Declaration des fonctions associer au .c du meme nom.
+	- ` show-flights.h ` : Declaration des fonctions associer au .c du meme nom.
+
+- **src** :
+	- `avg-flight-duration.c : **requet** requet du meme nom.
+	- `cell_function.c` : fichier qui contient les fonctions permetant de rechercher et de modifier notre structures de données.
+	- ` changed-flights.c` : **requet** requet du meme nom.
+	- ` charge_fichier.c ` : fichier qui contient les fonctions permetant d'extraire les donnés des fichiers et de les placer dans notre base de données. 
+	- ` condition_function.c : fichier contenant les condition permetant d'eviter des erreurs de saisi de l'utilisateur.
+	- ` delayed-airline-airline_id.c ` : **requet** requet du meme nom.
+	- ` find-initerary.c` : **requet** requet du meme nom.
+	- ` hash_algo.c` : fichier contenant les fonctions de hachage de nos differentes tables de hachage.
+	- `main.c` : fichier contenant les  fonction necesaire a main function.
+	- `main_function.c ` :  fichier contenant le corps de notre projet l'interface avec l'utilisateur.
+	- ` most-delayed-airlines-at-airport.c ` : **requet** requet du meme nom.
+	- ` most-delayed-flights.c  ` : **requet** requet du meme nom.
+	- ` most_delayed_airlines.c ` : **requet** requet du meme nom.
+	- ` quit.c` :   fichier contenant les fonction permetant de libérée la memoire et de quitté le programe.
+	- ` show-airlines.c` : **requet** requet du meme nom.
+	- ` show-airport.c ` : **requet** requet du meme nom.
+	- ` show-flights.c ` : **requet** requet du meme nom.
+	- ` test.c ` : fichier contenant nos tests de fonction.
