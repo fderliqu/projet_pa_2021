@@ -4,6 +4,7 @@
 #include "../includes/charge_fichier.h"
 #include "../includes/condition_function.h"
 #include "../includes/find-initerary.h"
+
 void suppr_tete_itinerary(struct cellule_vol** pL)
 {
     if(*pL == NULL)return;
@@ -48,7 +49,7 @@ void find_itinerary(
 	struct cellule_airport* Buffairport;
     struct cellule_compagnie* Buffairline;
     struct cellule_vol_date* Buffvol;
-	if(!(mask & timeON))time=-1;
+	if(!(mask & timeON))time=1;
 	else if(time<0 || time>MAXtimelimite)
 	{
         suppr_tete_itinerary(pItinerary);
@@ -78,7 +79,7 @@ void find_itinerary(
                     (Buffvol->vol.DIVERTED == 0) && 
                     (Buffvol->vol.SCHED_DEP > time) && 
                     (Buffvol->vol.DAY == J) &&
-                    (*limit>0))
+                    (*limit > 0))
                     {
                         if(strncmp(Buffvol->vol.DEST_AIR,DEST_AIR,SIZE_acronym) == 0)
                         {
@@ -121,7 +122,7 @@ void find_itinerary(
 void init_find_itinerary(struct line_arguments liste, struct cellule_airport* main_HT[max_Hairport])
 {
     //Conditions de lancement 
-	int J,M,limit = 0,time = 0;
+	int J,M,limit = 1,time = 1;
 	int occ_test = 0;
 	char* token;
 	char* date[2];

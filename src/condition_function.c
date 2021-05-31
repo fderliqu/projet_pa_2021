@@ -37,7 +37,7 @@ char build_mask_time_limit(struct line_arguments liste, int size_with_no_option)
         char tmp[10];
         strcpy(tmp,liste.arg[size_with_no_option+1]);
         char *token = strtok(tmp,"=");
-        if(strcmp(token,"limit"))return limitON;
+        if(!strcmp(token,"limit"))return limitON;
         return timeON;
     }
     return timeON_limitON;
