@@ -1,5 +1,6 @@
 #define maxmost_delayed_airlines 5
 #define maxmostat 3
+#define nb_arg_most_delayed_airline 0
 
 struct cellule_comp_most
 {

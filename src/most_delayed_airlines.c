@@ -2,7 +2,7 @@
 #include "../includes/hash_algo.h"
 #include "../includes/cell_function.h"
 #include "../includes/charge_fichier.h"
-
+#include "../includes/condition_function.h"
 #include "../includes/most_delayed_airlines.h"
 
 void init_table_most(struct cellule_comp_most tablecomp[max_Hdatacomp])
@@ -182,3 +182,8 @@ void show_most_delayed_airline(struct cellule_airport* Htable_airport[max_Hairpo
     afficheliste_airlines_moy(&lmax, tablecomp, NAMEcomp);
 }
 
+void init_most_delayed_airlines(struct line_arguments liste , struct cellule_airport** main_HT ,struct cellule_compagnieDATA** data_HT)
+{
+    if(number_parameter_test(liste,nb_arg_most_delayed_airline,0) == 0)return;
+    show_most_delayed_airline(main_HT,data_HT);
+}   
