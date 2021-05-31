@@ -48,9 +48,7 @@ void show_flights(struct cellule_airport *main_HT[max_Hairport], char AIRPORT[SI
 			{
 				if( (Buffvol->vol.DAY == J) && (Buffvol->vol.SCHED_DEP > time) )//La condition sera toujours valide à time = -1
 				{
-					if(Buffvol->vol.DIVERTED)print_diverted_flight(Buffvol,Buffairline->IATA_CODE);
-					else if(Buffvol->vol.CANCELLED)print_cancelled_flight(Buffvol,Buffairline->IATA_CODE);
-					else print_normal_flight(Buffvol,Buffairline->IATA_CODE);
+					print_normal_flight(Buffvol,Buffairline->IATA_CODE);
 					compt++;
 					if(compt==limit) //La condition ne sera jamais valide à limit = -1
 					{

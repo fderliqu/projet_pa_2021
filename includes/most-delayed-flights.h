@@ -1,4 +1,5 @@
 #define maxmostflights 5
+#define nb_arg_most_delayed_flights 0
 
 struct vol_IATA
 {
@@ -14,4 +15,4 @@ struct liste_delayed_flights
 
 void affichelisteflights(struct liste_delayed_flights*);
 
-void show_most_delayed_flights (struct cellule_airport **,int);
+void init_most_delayed_flights(struct line_arguments, struct cellule_airport**);

@@ -3,6 +3,7 @@
 #include "../includes/cell_function.h"
 #include "../includes/charge_fichier.h"
 #include "../includes/main_function.h"
+#include "../includes/condition_function.h"
 
 #include "../includes/most-delayed-flights.h"
 
@@ -11,13 +12,13 @@ void affichelisteflights (struct liste_delayed_flights*lc)
     int cpt = lc->dernier;
     while (cpt >= 0)
     {
-        printf ("%d %d %d %s %s %s ", lc->volaffiche[cpt].vol.DAY, lc->volaffiche[cpt].vol.MONTH,
+        printf ("%d,%d,%d,%s,%s,%s,", lc->volaffiche[cpt].vol.DAY, lc->volaffiche[cpt].vol.MONTH,
                 lc->volaffiche[cpt].vol.WEEKDAY, lc->volaffiche[cpt].IATA_AIRLINE,
                 (lc->volaffiche[cpt].vol).ORG_AIR, lc->volaffiche[cpt].vol.DEST_AIR);
-        printf ("%d %f %f %d %d ", lc->volaffiche[cpt].vol.SCHED_DEP,
+        printf ("%d,%f,%f,%d,%d,", lc->volaffiche[cpt].vol.SCHED_DEP,
                 lc->volaffiche[cpt].vol.DEP_DELAY, lc->volaffiche[cpt].vol.AIR_TIME,
                 lc->volaffiche[cpt].vol.DIST, lc->volaffiche[cpt].vol.SCHED_ARR);
-        printf ("%f %hd %hd \n", lc->volaffiche[cpt].vol.ARR_DELAY,
+        printf ("%f,%hd,%hd,\n", lc->volaffiche[cpt].vol.ARR_DELAY,
                 lc->volaffiche[cpt].vol.DIVERTED, lc->volaffiche[cpt].vol.CANCELLED);
         cpt--;
     }
@@ -136,4 +137,10 @@ void show_most_delayed_flights (struct cellule_airport *Htable_airport[max_Hairp
         }
     }
     affichelisteflights(&lc);
+}
+
+void init_most_delayed_flights(struct line_arguments liste, struct cellule_airport* main_HT[max_Hairport])
+{
+    if(number_parameter_test(liste,nb_arg_most_delayed_flights,0) == 0)return;
+    show_most_delayed_flights(main_HT,maxmostflights);
 }
