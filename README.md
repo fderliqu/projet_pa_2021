@@ -7,8 +7,8 @@ Projet qui a pour but de realiser des requetes permetant a un utilisateurs d'ana
 ## CONTENU
 Ce depot contient dans la branche master differents répertoires dans les quelles ce trouve l'ensemble des fonctions nécessaires a notre livrable 
 - **data** :
-	`LICENSE` : Certificat de droit de libre accès aux données.
-	`airlines.csv` : Donnéess des compagnies aériennes.
-	`airports.csv` : Données des aéroport.
-	`flights.csv` : Données des vols.
-	`requetes.txt : Requetes de tests.
+	-`LICENSE` : Certificat de droit de libre accès aux données.
+	-`airlines.csv` : Donnéess des compagnies aériennes.
+	-`airports.csv` : Données des aéroport.
+	-`flights.csv` : Données des vols.
+	-`requetes.txt : Requetes de tests.
