@@ -11,7 +11,7 @@ Ce depot contient dans la branche master differents répertoires dans les quelle
 	- `airlines.csv` : Donnéess des compagnies aériennes.
 	- `airports.csv` : Données des aéroport.
 	- `flights.csv` : Données des vols.
-	- `requetes.txt : Requetes de tests.
+	- `requetes.txt ` : Requetes de tests.
 
 - **includes** :
 	- `avg-flight-duration.h` : Declaration de la fonction associer au .c du meme nom.
@@ -55,7 +55,7 @@ Ce depot contient dans la branche master differents répertoires dans les quelle
 - Pour finir :
 	- **Makefile** :  Fichier permetant la compilation automatique
 	- **Rapport.pdf** :  Compte-rendu du projet 
-	- ** clang-format ** :  fichier contenant les regles de formatage du langage C
+	- **clang-format** :  fichier contenant les regles de formatage du langage C
 
 ## COMPILATION
 	La compilation est a realiser la premiere fois que l'utilisateur recupère les fichiers.
