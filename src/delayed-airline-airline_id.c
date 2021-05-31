@@ -1,7 +1,7 @@
-#include"../includes/init.h"
-#include"../includes/hash_algo.h"
-#include"../includes/delayed-airline-airline_id.h"
-#include"../includes/condition_function.h"
+#include "../includes/init.h"
+#include "../includes/delayed-airline-airline_id.h"
+#include "../includes/condition_function.h"
+#include "../includes/hash_algo.h"
 
 void delayed_airline (struct cellule_airport *Htable_airport[max_Hairport], char IATA_CODE[SIZE_airline_acro])
 {
@@ -64,11 +64,11 @@ void delayed_airline (struct cellule_airport *Htable_airport[max_Hairport], char
     // printf("cpt %d\n", cpt);
 }
 
-void init_delayed_airlines(struct line_arguments liste, struct cellule_airport* main_HT[max_Hairport])
+void init_delayed_airlines (struct line_arguments liste, struct cellule_airport *main_HT[max_Hairport])
 {
-    //Conditions de lancement 
-    if(number_parameter_test(liste,nb_arg_delayed_airlines,0) == 0)return;
-    if(lenght_parameter_test(liste,SIZE_airline_acro-1,1) == 0)return;
-    //Lancement
-    delayed_airline(main_HT,liste.arg[1]);
+    // Conditions de lancement
+    if (number_parameter_test (liste, nb_arg_delayed_airlines, 0) == 0) return;
+    if (lenght_parameter_test (liste, SIZE_airline_acro - 1, 1) == 0) return;
+    // Lancement
+    delayed_airline (main_HT, liste.arg[1]);
 }

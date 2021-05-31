@@ -1,8 +1,4 @@
-/*
-RESTE A FAIRE :
--> ajouter non pas que le iatacode de l'aeroport mais toute la structure
--> c'est tout je crois
-*/
+
 #include "../includes/init.h"
 #include "../includes/hash_algo.h"
 #include "../includes/cell_function.h"
