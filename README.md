@@ -55,11 +55,13 @@ Ce depot contient dans la branche master differents répertoires dans les quelle
 - Pour finir :
 	- **Makefile** :  Fichier permetant la compilation automatique
 	- **Rapport.pdf** :  Compte-rendu du projet 
-	- **clang-format ** :  fichier contenant les regles de formatage du langage C
+	- ** clang-format ** :  fichier contenant les regles de formatage du langage C
 
 ## COMPILATION
 	La compilation est a realiser la premiere fois que l'utilisateur recupère les fichiers.
 	Pour ce faire l'uilisateur doit taper la commande ` Make `.
-	Il peut aussi taper la commande ` make clean` pour suprimier les fichiers realiser par make.
+	Il peut aussi taper la commande ` make clean` pour supprimier les fichiers realiser par make.
 
 ## UTILISATION DU PROGRAMME
+
+Le programme ce ferme lorsque l'utilisateur effectue la requet ` quit ` .
