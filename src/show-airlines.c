@@ -5,8 +5,6 @@
 #include "../includes/show-airlines.h"
 #include "../includes/condition_function.h"
 
-#define nb_arg_show_airlines 1
-
 void show_airlines(struct cellule_airport* main_HT[max_Hairport], struct cellule_compagnieDATA* data_HT[max_Hdatacomp], char AIRPORT[SIZE_acronym])
 {
 	struct cellule_airport* Buffairport;
@@ -41,9 +39,9 @@ void init_show_airlines(struct line_arguments liste, struct cellule_airport* mai
 {
     //Conditions de lancement 
 	int test;
-	test = number_parameter_test(liste,nb_arg_show_airlines);
+	test = number_parameter_test(liste,nb_arg_show_airlines,0);
     if(test == 0)return;
-	test = lenght_parameter_test(liste,SIZE_acronym-1);
+	test = lenght_parameter_test(liste,SIZE_acronym-1,1);
     if(test == 0)return;
     //Lancement
     show_airlines(main_HT,data_HT,liste.arg[1]);
