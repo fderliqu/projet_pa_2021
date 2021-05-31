@@ -84,9 +84,9 @@ void init_show_airport(struct line_arguments liste, struct cellule_airport* main
 {
     int test;
     //Conditions de lancement 
-    test = number_parameter_test(liste,nb_arg_show_airport);
+    test = number_parameter_test(liste,nb_arg_show_airport,0);
     if(test == 0)return;
-    test = lenght_parameter_test(liste,SIZE_airline_acro-1);
+    test = lenght_parameter_test(liste,SIZE_airline_acro-1,1);
     if(test == 0)return;
     //Lancement
     show_airport(main_HT,liste.arg[1]);
