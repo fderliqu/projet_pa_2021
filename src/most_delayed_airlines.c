@@ -5,8 +5,6 @@
 
 #include "../includes/most_delayed_airlines.h"
 
-
-
 void init_table_most(struct cellule_comp_most tablecomp[max_Hdatacomp])
 {
     int cpt = 0;
@@ -22,7 +20,6 @@ void ajout_moyenne(struct cellule_comp_most tablecomp[max_Hdatacomp], struct vol
 {
     tablecomp[index].nbvol++;
     tablecomp[index].retardtotal += vol.ARR_DELAY;
-    // printf("%f   %f \n ", tablecomp[index].retardtotal, tablecomp[index].nbvol);
 }
 
 
@@ -42,7 +39,7 @@ void afficheliste_airlines_moy(struct liste_most_airline* lc,
 }
 
 
-void affichemax(struct liste_most_airline* lmax, struct cellule_comp_most tablecomp[max_Hdatacomp], int cpttab)
+void affichemax(struct liste_most_airline* lmax, struct cellule_comp_most tablecomp[max_Hdatacomp], int cpttab, int max_lenght)
 {
     int buff, buff2, cpt;
     cpt = 0;
@@ -51,7 +48,7 @@ void affichemax(struct liste_most_airline* lmax, struct cellule_comp_most tablec
     // printf("tablcomp moyenne %f  \n", tablecomp[cpttab].moyenne);
     // printf("dernier %d  \n", lmax->dernier);
     // initialisation de la liste
-    if (lmax->dernier < maxmost_delayed_airlines - 1)
+    if (lmax->dernier < max_lenght - 1)
     {
         lmax->dernier++;
 
@@ -89,7 +86,7 @@ void affichemax(struct liste_most_airline* lmax, struct cellule_comp_most tablec
     }
     // parcours de la liste
     cpt = 1;
-    while (cpt < maxmost_delayed_airlines)
+    while (cpt < max_lenght)
     {
         if (tablecomp[cpttab].moyenne < tablecomp[lmax->maxIATA[cpt]].moyenne)
         {
@@ -176,7 +173,7 @@ void show_most_delayed_airline(struct cellule_airport* Htable_airport[max_Hairpo
         // printf(" nb vol %d \n", tablecomp[cpttab].nbvol);
         if (tablecomp[cpttab].nbvol != -1)
         {
-            affichemax(&lmax, tablecomp, cpttab);
+            affichemax(&lmax, tablecomp, cpttab, maxmost_delayed_airlines);
             // afficheliste(&lmax, tablecomp, NAMEcomp);
             // printf("----------------------------\n");
         }
