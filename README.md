@@ -18,7 +18,7 @@ Ce depot contient dans la branche master differents répertoires dans les quelle
 	- `cell_function.h` :  Declaration des fonctions et structures de données associer au .c du meme nom.
 	- ` changed-flights.h` : Declaration de la fonction associer au .c du meme nom.
 	- ` charge_fichier.h ` : Declaration de la fonction associer au .c du meme nom.
-	- ` condition_function.h : Declaration des fonctions associer au .c du meme nom.
+	- ` condition_function.h ` : Declaration des fonctions associer au .c du meme nom.
 	- ` delayed-airline-airline_id.h ` : Declaration de la fonction associer au .c du meme nom.
 	- ` find-initerary.h` : Declaration de la fonction associer au .c du meme nom.
 	- ` hash_algo.h` : Declaration des fonctions associer au .c du meme nom.
@@ -63,5 +63,7 @@ Ce depot contient dans la branche master differents répertoires dans les quelle
 	Il peut aussi taper la commande ` make clean` pour supprimier les fichiers realiser par make.
 
 ## UTILISATION DU PROGRAMME
+Pour executer le programme l'utilisateur a deux choix
+
 
 Le programme ce ferme lorsque l'utilisateur effectue la requet ` quit ` .
