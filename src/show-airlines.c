@@ -1,7 +1,11 @@
+#include "../includes/init.h"
 #include "../includes/hash_algo.h"
 #include "../includes/cell_function.h"
 #include "../includes/charge_fichier.h"
-#include "../includes/show-airport.h"
+#include "../includes/show-airlines.h"
+#include "../includes/condition_function.h"
+
+#define nb_arg_show_airlines 1
 
 void show_airlines(struct cellule_airport* main_HT[max_Hairport], struct cellule_compagnieDATA* data_HT[max_Hdatacomp], char AIRPORT[SIZE_acronym])
 {
@@ -17,7 +21,7 @@ void show_airlines(struct cellule_airport* main_HT[max_Hairport], struct cellule
 	}
 	if(Buffairport->is_empty)
 	{
-		printf("No company operates flights at this airport\n");
+		printf("No airlines operates flights at this airport\n");
 		return;
 	}
 	for(int i=0;i<max_Hcomp;i++)
@@ -31,5 +35,17 @@ void show_airlines(struct cellule_airport* main_HT[max_Hairport], struct cellule
 			Buffairline = Buffairline->compagnie_suiv;
 		}
 	}
+}
+
+void init_show_airlines(struct line_arguments liste, struct cellule_airport* main_HT[max_Hairport], struct cellule_compagnieDATA* data_HT[max_Hdatacomp])
+{
+    //Conditions de lancement 
+	int test;
+	test = number_parameter_test(liste,nb_arg_show_airlines);
+    if(test == 0)return;
+	test = lenght_parameter_test(liste,SIZE_acronym-1);
+    if(test == 0)return;
+    //Lancement
+    show_airlines(main_HT,data_HT,liste.arg[1]);
 }
 	

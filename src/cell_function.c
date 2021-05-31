@@ -1,4 +1,4 @@
-
+#include "../includes/init.h"
 #include "../includes/hash_algo.h"
 #include"../includes/cell_function.h"
 

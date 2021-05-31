@@ -1,4 +1,6 @@
+#include "../includes/init.h"
 #include "../includes/hash_algo.h"
+
 
 int my_pow(int a, int b) {
   if (b == 0) {

@@ -14,6 +14,10 @@
 #define max_Hdate 12 
 #define max_Hdataairport 17576 //26*26*26 possibilité
 
+#define max_arguments 100
+#define max_function_lenght 50
+#define nb_function 12
+
 #define timeON_limitON 	0x03
 #define timeON	0x02
 #define limitON 0x01
@@ -89,10 +93,17 @@ struct cellule_vol_date
 	struct cellule_vol_date* vol_suiv;
 };
 
-//struct cellule_vol_date* Htable_date[max_Hdate];
+//Cellule généralisé des vols pour fonctions
 
 struct cellule_vol{
     struct vol data;
     char airline[SIZE_airline_acro];
     struct cellule_vol* suiv;
+};
+
+//structure pour stocker les arguments de l'utilisateur = liste contigue
+
+struct line_arguments{
+  char *arg[max_arguments];
+  int dernier;
 };

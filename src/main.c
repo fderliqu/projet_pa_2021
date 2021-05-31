@@ -1,24 +1,18 @@
+#include "../includes/init.h"
 #include "../includes/hash_algo.h"
 #include "../includes/cell_function.h"
 #include "../includes/charge_fichier.h"
-#include "../includes/show-airport.h"
-#include "../includes/show-airlines.h"
-#include "../includes/show-flights.h"
-#include "../includes/avg-flight-duration.h"
-#include "../includes/find-initerary.h"
-#include "../includes/most-delayed-flights.h"
+#include "../includes/main_function.h"
+
 
 int main() {
   struct cellule_airport *HT[max_Hairport];
   struct cellule_compagnieDATA *HTalData[max_Hdatacomp];
   //struct cellule_compagnieDATA *tmp;
   // Initialisation de la premiere table de hash (par aéroport de départ)
-  init_ht_airport(HT);
-  charge_vol(HT);
   //print_airport(HT);
   //print_specifique_flight(HT,"ATL","EV",2);
-  init_ht_datacomp(HTalData, max_Hdatacomp);
-  charge_dataCompagnie(HTalData);/*
+  /*
   for(int i=0;i<max_Hdatacomp;i++)
   {
     if(HTalData[i]!=NULL)
@@ -31,7 +25,7 @@ int main() {
         tmp = tmp->compagnie_suiv;
       }
     }
-  }*/
+  }
   int limit=3, time=0;
   char mask = timeON_limitON;
   show_airport(HT,"HA");
@@ -41,5 +35,38 @@ int main() {
   struct cellule_vol *liste = NULL;
   find_itinerary(HT,&liste,"SFO","BUR",6,15,time,&limit,mask);
   show_most_delayed_flights(HT);
-  printf("fin\n");
+  printf("fin\n");*/       
+  const char* separators = " \n";
+  char*       ligne = NULL;
+  size_t      n = 0;
+  int         i = 0;
+  struct line_arguments liste;
+  liste.dernier = -1;
+  init_ht_airport(HT);
+  charge_vol(HT);
+  init_ht_datacomp(HTalData, max_Hdatacomp);
+  charge_dataCompagnie(HTalData);
+  while(getline(&ligne,&n,stdin) != -1)
+  {
+    liste.dernier++;
+    liste.arg[liste.dernier] = strtok(ligne,separators);
+    while(liste.arg[liste.dernier]!=NULL)
+    {
+      liste.dernier++;
+      liste.arg[liste.dernier] = strtok(NULL,separators);
+    }
+    liste.dernier--;
+
+    printf(">");
+    while(i <= liste.dernier)
+    {
+      printf("%s ",liste.arg[i]);
+      i++;
+    }
+    printf("\n");
+    i=0;
+    launch_function(liste,HT,HTalData);
+    liste.dernier = -1;
+    printf("\n");
+  }
 }

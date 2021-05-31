@@ -1,1 +1,1 @@
-void show_airlines(struct cellule_airport**, struct cellule_compagnieDATA**, char*);
+void init_show_airlines(struct line_arguments, struct cellule_airport**, struct cellule_compagnieDATA**);

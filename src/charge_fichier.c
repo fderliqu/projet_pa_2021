@@ -3,9 +3,11 @@ RESTE A FAIRE :
 -> ajouter non pas que le iatacode de l'aeroport mais toute la structure
 -> c'est tout je crois
 */
+#include "../includes/init.h"
 #include "../includes/hash_algo.h"
 #include "../includes/cell_function.h"
 #include "../includes/charge_fichier.h"
+
 #define max_colonne 14
 #define max_strtab_lenght 100
 
@@ -14,7 +16,7 @@ void my_strtok(char *str, char strtab[max_colonne][max_strtab_lenght]) {
   int pos = 0;
   int emplacement = 0;
   while (c != '\0') {
-    if (c == 44) { 
+    if (c == ',') { 
       strtab[emplacement][pos] = '\0';
       emplacement++;
       pos = 0;

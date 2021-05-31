@@ -1,5 +1,3 @@
-#include "init.h"
-
 //define constante
 
 #define MAX_LETTER 26
