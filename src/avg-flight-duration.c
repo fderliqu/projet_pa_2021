@@ -57,7 +57,7 @@ void avg_flight_duration(struct cellule_airport *main_HT[max_Hairport], char ORG
     printf("average : %f minutes (%d flights)\n", somme_airtime/(float)nb_flight, nb_flight);
 }
 
-void init_avg_flight_duration(struct line_arguments liste, struct cellule_airport** main_HT)
+void init_avg_flight_duration(struct line_arguments liste, struct cellule_airport* main_HT[max_Hairport])
 {
     if(number_parameter_test(liste,nb_arg_avg_flight_duration,0) == 0)return;
     int occ_test=1; //1

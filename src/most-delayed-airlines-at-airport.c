@@ -81,7 +81,7 @@ void show_most_delayed_airline_at_airport(struct cellule_airport* Htable_airport
     afficheliste_airlines_moy(&lmax, tablecomp, NAMEcomp);
 }
 
-void init_show_most_delayed_airline_at_airport(struct line_arguments liste, struct cellule_airport** main_HT,struct cellule_compagnieDATA** data_HT)
+void init_show_most_delayed_airline_at_airport(struct line_arguments liste, struct cellule_airport* main_HT[max_Hairport],struct cellule_compagnieDATA* data_HT[max_Hdatacomp])
 {
     //Conditions de lancement 
 	int test;

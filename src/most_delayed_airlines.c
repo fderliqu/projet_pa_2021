@@ -182,7 +182,7 @@ void show_most_delayed_airline(struct cellule_airport* Htable_airport[max_Hairpo
     afficheliste_airlines_moy(&lmax, tablecomp, NAMEcomp);
 }
 
-void init_most_delayed_airlines(struct line_arguments liste , struct cellule_airport** main_HT ,struct cellule_compagnieDATA** data_HT)
+void init_most_delayed_airlines(struct line_arguments liste , struct cellule_airport* main_HT[max_Hairport] ,struct cellule_compagnieDATA* data_HT[max_Hdatacomp])
 {
     if(number_parameter_test(liste,nb_arg_most_delayed_airline,0) == 0)return;
     show_most_delayed_airline(main_HT,data_HT);
