@@ -8,7 +8,7 @@
 #include "../includes/most-delayed-flights.h"
 
 void affichelisteflights (struct liste_delayed_flights *lc)
-{
+{   //affiche les elements de la liste du debut a la fin 
     int cpt = lc->dernier;
     while (cpt >= 0)
     {
@@ -25,19 +25,25 @@ void affichelisteflights (struct liste_delayed_flights *lc)
 }
 
 void most_delay (struct liste_delayed_flights *lc, struct vol vol, char IATA[SIZE_airline_acro], int maxflights)
-{
+{  //cette fonction initialise la liste et la trie elle est semblable a un trie a bulle
     int             cpt = 0;
     struct vol_IATA buff, buff2;
-    // initialisation de la liste
+    // initialisation de la liste si pas pleine
     if (lc->dernier < maxflights - 1)
     {
         lc->dernier++;
-        if (vol.ARR_DELAY > lc->volaffiche[(lc->dernier) - 1].vol.ARR_DELAY)
+        if (lc->dernier == 0) // si la liste est vide 
+        {
+            lc->volaffiche[lc->dernier].vol = vol;
+            strcpy (lc->volaffiche[lc->dernier].IATA_AIRLINE, IATA);
+            return;
+        }
+        if (vol.ARR_DELAY > lc->volaffiche[(lc->dernier) - 1].vol.ARR_DELAY) 
         {
             lc->volaffiche[lc->dernier].vol = vol;
             strcpy (lc->volaffiche[lc->dernier].IATA_AIRLINE, IATA);
         }
-        while (cpt < (lc->dernier))
+        while (cpt < (lc->dernier)) // si la liste et pas vide et qu'on est pas sup a dernier 
         {
             if (vol.ARR_DELAY < lc->volaffiche[cpt].vol.ARR_DELAY)
             {
@@ -54,11 +60,6 @@ void most_delay (struct liste_delayed_flights *lc, struct vol vol, char IATA[SIZ
                 }
             }
             cpt++;
-        }
-        if (lc->dernier == 0)
-        {
-            lc->volaffiche[lc->dernier].vol = vol;
-            strcpy (lc->volaffiche[lc->dernier].IATA_AIRLINE, IATA);
         }
         return;
     }
