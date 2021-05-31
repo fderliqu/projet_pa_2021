@@ -61,9 +61,12 @@ Ce depot contient dans la branche master differents répertoires dans les quelle
 	La compilation est a realiser la premiere fois que l'utilisateur recupère les fichiers.
 	Pour ce faire l'uilisateur doit taper la commande ` Make `.
 	Il peut aussi taper la commande ` make clean` pour supprimier les fichiers realiser par make.
+	L'éxécutable sera stocké dans le dossier ` build `
 
 ## UTILISATION DU PROGRAMME
-Pour executer le programme l'utilisateur a deux choix
+Pour executer à la racine source le programme l'utilisateur a deux choix
 
+- Soit par redirection : ` ./build/main < requetes.txt `
+- Soit sans direction : ` ./build/main `
 
 Le programme ce ferme lorsque l'utilisateur effectue la requet ` quit ` .
