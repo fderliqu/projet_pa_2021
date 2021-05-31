@@ -4,8 +4,6 @@
 #include "../includes/charge_fichier.h"
 #include "../includes/condition_function.h"
 #include "../includes/show-airport.h"
-#define sizeHT 100
-#define nb_arg_show_airport 1
 
 void print_show_airport(struct cellule_airportDATA *HT[sizeHT])
 {
