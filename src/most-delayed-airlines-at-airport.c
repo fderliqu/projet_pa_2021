@@ -2,6 +2,7 @@
 #include "../includes/hash_algo.h"
 #include "../includes/cell_function.h"
 #include "../includes/charge_fichier.h"
+#include "../includes/condition_function.h"
 
 #include "../includes/most_delayed_airlines.h"
 #include "../includes/most-delayed-airlines-at-airport.h"
@@ -78,4 +79,16 @@ void show_most_delayed_airline_at_airport(struct cellule_airport* Htable_airport
         cpttab++;
     }
     afficheliste_airlines_moy(&lmax, tablecomp, NAMEcomp);
+}
+
+void init_show_most_delayed_airline_at_airport(struct line_arguments liste, struct cellule_airport** main_HT,struct cellule_compagnieDATA** data_HT)
+{
+    //Conditions de lancement 
+	int test;
+	test = number_parameter_test(liste,nb_arg_most_delayed_airline_at_airport,0);
+    if(test == 0)return;
+	test = lenght_parameter_test(liste,SIZE_acronym-1,1);
+    if(test == 0)return;
+    //Lancement
+    show_most_delayed_airline_at_airport(main_HT,data_HT,liste.arg[1]);
 }
