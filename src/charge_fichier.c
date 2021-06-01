@@ -30,14 +30,14 @@ void conversion_vol(char strtab[max_colonne][max_strtab_lenght],
   PTvol->MONTH = (int)strtol(strtab[0], NULL, 10);
   PTvol->DAY = (int)strtol(strtab[1], NULL, 10);
   PTvol->WEEKDAY = (int)strtol(strtab[2], NULL, 10);
-  strncpy(PTvol->ORG_AIR, strtab[4], SIZE_acronym);
-  strncpy(PTvol->DEST_AIR, strtab[5], SIZE_acronym);
+  strcpy(PTvol->ORG_AIR, strtab[4]);
+  strcpy(PTvol->DEST_AIR, strtab[5]);
   PTvol->SCHED_DEP = (int)strtol(strtab[6], NULL, 10);
-  PTvol->DEP_DELAY = -5000000.0;
+  PTvol->DEP_DELAY = 0;
   PTvol->AIR_TIME = -1.0;
   PTvol->DIST = (int)strtol(strtab[9], NULL, 10);
   PTvol->SCHED_ARR = (int)strtol(strtab[10], NULL, 10);
-  PTvol->ARR_DELAY = -5000000.0;
+  PTvol->ARR_DELAY = 0;
   PTvol->CANCELLED = (int)strtol(strtab[13], NULL, 10);
   PTvol->DIVERTED = (int)strtol(strtab[12], NULL, 10);
   if (PTvol->CANCELLED == 0) {
@@ -51,10 +51,10 @@ void conversion_vol(char strtab[max_colonne][max_strtab_lenght],
 
 void conversion_airport(char strtab[max_colonne][max_strtab_lenght], struct airport *PTairport)
 {
-  strncpy(PTairport->AIRPORT,strtab[0],SIZE_city);
-  strncpy(PTairport->CITY,strtab[1],SIZE_city);
-  strncpy(PTairport->STATE,strtab[2],SIZE_state);
-  strncpy(PTairport->COUNTRY,strtab[3],SIZE_acronym);
+  strcpy(PTairport->AIRPORT,strtab[0]);
+  strcpy(PTairport->CITY,strtab[1]);
+  strcpy(PTairport->STATE,strtab[2]);
+  strcpy(PTairport->COUNTRY,strtab[3]);
   PTairport->LATITUDE = strtof(strtab[4],NULL);
   PTairport->LONGITUDE = strtof(strtab[5],NULL);
 }
@@ -130,7 +130,7 @@ void charge_vol(struct cellule_airport *ht_ap[max_Hairport]) {
       char IATA_code[SIZE_airline_acro]; // On stocke l'iata code ici car on ne
                                          // le met pas dans la struct vol = gain
                                          // de place
-      strncpy(IATA_code, strtab[3], SIZE_airline_acro);
+      strcpy(IATA_code, strtab[3]);
       index = get_hash_index_airport(vol.ORG_AIR, max_Hairport);
       Buffairport = recherche_cellHT_airport(ht_ap[index], vol.ORG_AIR);
       if(Buffairport==NULL)
