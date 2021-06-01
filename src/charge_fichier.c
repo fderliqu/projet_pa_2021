@@ -62,8 +62,10 @@ void conversion_airport(char strtab[max_colonne][max_strtab_lenght], struct airp
 
 void charge_dataAirport(struct cellule_airportDATA *ht_apData[max_Hdataairport])
 {
-  FILE *fp = fopen("../data/airports.csv", "r");
+  FILE *fp;
+  fp = fopen("../data/airports.csv","r");
   if(fp != NULL) {
+    printf("fichier ouvert\n");
     char tmp[200];
     char strtab[max_colonne][max_strtab_lenght];
     struct airport airport;
@@ -77,14 +79,16 @@ void charge_dataAirport(struct cellule_airportDATA *ht_apData[max_Hdataairport])
       index = get_hash_index_airport(airport.IATA_CODE,max_Hdataairport);
       ajout_airport(&(ht_apData[index]),airport);
     }
-    fclose(fp);
   }
+  if(fp != NULL)fclose(fp);
 }
 
 void charge_dataCompagnie(struct cellule_compagnieDATA *ht_alData[max_Hdatacomp])
 {
-  FILE *fp = fopen("../data/airlines.csv", "r");
+  FILE *fp;
+  fp = fopen("../data/airlines.csv","r");
   if(fp != NULL) {
+    printf("fichier ouvert\n");
     char IATA_CODE[SIZE_airline_acro];
 	  char AIRLINE[SIZE_airline];
     int index;
@@ -96,14 +100,17 @@ void charge_dataCompagnie(struct cellule_compagnieDATA *ht_alData[max_Hdatacomp]
       ajout_compagnie(&(ht_alData[index]),IATA_CODE,AIRLINE);
     }
   }
+  if(fp != NULL)fclose(fp);
 }
 
 void charge_vol(struct cellule_airport *ht_ap[max_Hairport]) {
   struct cellule_airportDATA *ht_apDATA[max_Hdataairport];
   init_ht_dataairport(ht_apDATA, max_Hdataairport);
   charge_dataAirport(ht_apDATA);
-  FILE *fp = fopen("../data/flights.csv", "r");
+  FILE* fp;
+  fp = fopen("../data/flights.csv","r");
   if (fp != NULL) {
+    printf("fichier ouvert\n");
     struct cellule_airport *Buffairport;
     struct cellule_compagnie *Buffairline;
     struct airport dataAPtmp;
@@ -154,7 +161,6 @@ void charge_vol(struct cellule_airport *ht_ap[max_Hairport]) {
       // bcp trop gourmand?)
       fscanf(fp, "%s", tmp);
     }
-    fclose(fp);
     //ajout des derniere airports dans la table
     for(int i=0;i<max_Hdataairport;i++)
     {
@@ -171,6 +177,7 @@ void charge_vol(struct cellule_airport *ht_ap[max_Hairport]) {
       }
     }
   }
+  if(fp != NULL)fclose(fp);
 }
 
 //Fct de test toussa toussa
