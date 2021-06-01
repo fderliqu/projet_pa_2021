@@ -66,7 +66,8 @@ L'éxécutable sera stocké dans le dossier ` build `
 
 ## UTILISATION DU PROGRAMME
 
-Pour executer à la racine ./build le programme l'utilisateur a deux choix
+L'éxécutable est stockée dans le dossier build, et doit éxécuté dans ce dossier 
+Pour executer le programme l'utilisateur a deux choix
 
 - Soit par redirection : ` ./main < ../data/requetes.txt `
 - Soit sans direction : ` ./main `
