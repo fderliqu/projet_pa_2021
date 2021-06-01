@@ -83,7 +83,7 @@ void launch_function (struct line_arguments         liste,
         break;
 
     case 5:
-        init_most_delayed_airlines (liste, HT_main, HT_comp_data);
+        init_most_delayed_airlines (liste,HT_main,HT_comp_data);
         break;
     case 6:
         init_show_most_delayed_airline_at_airport (liste, HT_main, HT_comp_data);
