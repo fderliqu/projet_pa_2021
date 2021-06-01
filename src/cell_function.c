@@ -21,7 +21,7 @@ void ajout_tete_cellHT_airport (struct cellule_airport **pl, struct airport data
 void ajout_tete_cellHT_compagnie (struct cellule_compagnie **pl, char str[SIZE_airline_acro])
 {
     struct cellule_compagnie *cell = malloc (sizeof (struct cellule_compagnie));
-    strncpy (cell->IATA_CODE, str, SIZE_acronym);
+    strcpy (cell->IATA_CODE, str);
     init_ht_date (cell->pt_Htable_date);
     cell->compagnie_suiv = *pl;
     *pl                  = cell;
@@ -57,8 +57,8 @@ void ajout_compagnie (struct cellule_compagnieDATA **pl, char IATA_CODE[SIZE_air
 {
     struct cellule_compagnieDATA *new;
     new = malloc (sizeof (struct cellule_compagnieDATA));
-    strncpy (new->IATA_CODE, IATA_CODE, SIZE_airline_acro);
-    strncpy (new->AIRLINE, AIRLINE, SIZE_airline);
+    strcpy (new->IATA_CODE, IATA_CODE);
+    strcpy (new->AIRLINE, AIRLINE);
     new->compagnie_suiv = *pl;
     *pl                 = new;
     return;
@@ -122,14 +122,15 @@ void print_normal_flight (struct cellule_vol_date *cell, char airline[SIZE_airli
 {
     if (cell->vol.DIVERTED)
     {
-        printf ("%d,%d,%d,%s,%s,%s,%d,%f,%d,%d,%hd,%hd\n", cell->vol.MONTH, cell->vol.DAY, cell->vol.WEEKDAY,
-                airline, cell->vol.ORG_AIR, cell->vol.DEST_AIR, cell->vol.SCHED_DEP, cell->vol.DEP_DELAY,
-                cell->vol.DIST, cell->vol.SCHED_ARR, cell->vol.DIVERTED, cell->vol.CANCELLED);
+        printf ("%d,%d,%d,%s,%s,%s,%d,%.2f,N/A,%d,%d,N/A,%hd,%hd\n", cell->vol.MONTH, cell->vol.DAY,
+                cell->vol.WEEKDAY, airline, cell->vol.ORG_AIR, cell->vol.DEST_AIR,
+                cell->vol.SCHED_DEP, cell->vol.DEP_DELAY, cell->vol.DIST, cell->vol.SCHED_ARR,
+                cell->vol.DIVERTED, cell->vol.CANCELLED);
         return;
     }
     if (cell->vol.CANCELLED)
     {
-        printf ("%d,%d,%d,%s,%s,%s,%d,%d,%d,%hd,%hd\n", cell->vol.MONTH, cell->vol.DAY,
+        printf ("%d,%d,%d,%s,%s,%s,%d,N/A,N/A,%d,%d,N/A,%hd,%hd\n", cell->vol.MONTH, cell->vol.DAY,
                 cell->vol.WEEKDAY, airline, cell->vol.ORG_AIR, cell->vol.DEST_AIR, cell->vol.SCHED_DEP,
                 cell->vol.DIST, cell->vol.SCHED_ARR, cell->vol.DIVERTED, cell->vol.CANCELLED);
         return;

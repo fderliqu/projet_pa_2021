@@ -1,8 +1,8 @@
-#include "../includes/init.h"
 #include "../includes/cell_function.h"
 #include "../includes/charge_fichier.h"
 #include "../includes/condition_function.h"
 #include "../includes/hash_algo.h"
+#include "../includes/init.h"
 #include "../includes/show-airport.h"
 
 void print_show_airport (struct cellule_airportDATA *HT[sizeHT])

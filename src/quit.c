@@ -2,9 +2,8 @@
 #include "../includes/quit.h"
 #include "../includes/condition_function.h"
 #include "../includes/hash_algo.h"
-#include "../includes/show-airport.h"
 
-void quit (struct cellule_airport *HT_main[max_Hairport], struct cellule_compagnieDATA *HT_data[max_Hdatacomp])
+void quit (struct cellule_airport *HT_main[max_Hairport], struct cellule_compagnieDATA *HT_data[max_Hdatacomp], struct cellule_airportDATA *ht_apDATA[max_Hdataairport])
 {
     int                       cpt_airport, cpt_airline;
     struct cellule_airport *  Buffairport, *Buffairportsuiv;
@@ -34,5 +33,6 @@ void quit (struct cellule_airport *HT_main[max_Hairport], struct cellule_compagn
     }
     desaloc_ht_airport (HT_main);
     desaloc_ht_dataairline (HT_data, max_Hdatacomp);
+    desaloc_ht_dataairport (ht_apDATA, max_Hdataairport);
     printf ("All data is cleared, end of the function\n");
 }

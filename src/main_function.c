@@ -33,7 +33,8 @@ int dichotomie (char *l_fct[max_function_lenght], char fct[max_function_lenght])
 
 void launch_function (struct line_arguments         liste,
                       struct cellule_airport *      HT_main[max_Hairport],
-                      struct cellule_compagnieDATA *HT_comp_data[max_Hdatacomp])
+                      struct cellule_compagnieDATA *HT_comp_data[max_Hdatacomp],
+		      struct cellule_airportDATA *ht_apDATA[max_Hdataairport])
 {
     char *l_fct[nb_function] = {
         "avg-flight-duration",
@@ -83,7 +84,7 @@ void launch_function (struct line_arguments         liste,
         break;
 
     case 5:
-        init_most_delayed_airlines (liste,HT_main,HT_comp_data);
+        init_most_delayed_airlines (liste, HT_main, HT_comp_data);
         break;
     case 6:
         init_show_most_delayed_airline_at_airport (liste, HT_main, HT_comp_data);
@@ -92,7 +93,7 @@ void launch_function (struct line_arguments         liste,
         init_most_delayed_flights (liste, HT_main);
         break;
     case 8:
-        quit (HT_main, HT_comp_data);
+        quit (HT_main, HT_comp_data ,ht_apDATA);
         return;
         break;
     case 9:

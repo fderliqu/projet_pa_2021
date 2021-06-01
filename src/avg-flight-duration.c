@@ -1,7 +1,6 @@
 #include "../includes/init.h"
 #include "../includes/avg-flight-duration.h"
 #include "../includes/cell_function.h"
-#include "../includes/charge_fichier.h"
 #include "../includes/condition_function.h"
 #include "../includes/hash_algo.h"
 

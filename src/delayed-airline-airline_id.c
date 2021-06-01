@@ -3,6 +3,7 @@
 #include "../includes/condition_function.h"
 #include "../includes/hash_algo.h"
 
+
 void delayed_airline (struct cellule_airport *Htable_airport[max_Hairport], char IATA_CODE[SIZE_airline_acro])
 {
     int                       cpt_airport, cpt_date, indexcomp, cpt;

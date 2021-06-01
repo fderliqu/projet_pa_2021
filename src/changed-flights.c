@@ -1,8 +1,8 @@
 #include "../includes/init.h"
 #include "../includes/cell_function.h"
-#include "../includes/charge_fichier.h"
 #include "../includes/condition_function.h"
 #include "../includes/hash_algo.h"
+#include "../includes/changed-flights.h"
 
 void changed_flights (struct cellule_airport *Htable_airport[max_Hairport], int jour, int mois)
 {

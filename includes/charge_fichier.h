@@ -1,9 +1,9 @@
-void charge_dataAirport(struct cellule_airportDATA**);
+//Charge le fichier airports.csv dans la base
+int charge_dataAirport(struct cellule_airportDATA**, char*);
 
-void charge_dataCompagnie(struct cellule_compagnieDATA**);
+//Charge le fichier airlines.csv dans la base
+int charge_dataCompagnie(struct cellule_compagnieDATA**, char*);
 
-void charge_vol(struct cellule_airport **);
+//Charge le fichier flights.csv dans la base
+int charge_vol(struct cellule_airport **,struct cellule_airportDATA **, char*);
 
-void print_specifique_flight(struct cellule_airport**, char*, char*, int);
-
-void print_airport(struct cellule_airport**);

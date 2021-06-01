@@ -1,9 +1,10 @@
-show-flights ATL 2-26
-show-flights SLC 4-17 1600 limit=5
-show-flights ATL 2-26 limit=5
-show-flights SLC 4-17 1600 
-find-itinerary LAX BUR 6-15 
-find-itinerary LAX BUR 6-15 limit=5
-find-itinerary LAX BUR 6-15 1040
-find-itinerary LAX BUR 6-15 1040 limit=1
-quit
+avg-flight-duration LAX SFO
+changed-flights 12-29
+delayed-airline AA
+find-itinerary SFO CHA  6-15 500 limit=5
+most-delayed-airlines
+most-delayed-airlines-at-airport LAX
+most-delayed-flights
+show-airlines LAX
+show-airports HA
+show-flights ATL 2-26 

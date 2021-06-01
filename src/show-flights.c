@@ -1,7 +1,6 @@
 #include "../includes/init.h"
 #include "../includes/show-flights.h"
 #include "../includes/cell_function.h"
-#include "../includes/charge_fichier.h"
 #include "../includes/condition_function.h"
 #include "../includes/hash_algo.h"
 
@@ -70,7 +69,7 @@ void init_show_flights (struct line_arguments liste, struct cellule_airport *mai
     int   occ_test = 0;
     char *token;
     char *date[2];
-    char mask = build_mask_time_limit (liste, nb_arg_show_flights); // Build du masque
+    char  mask = build_mask_time_limit (liste, nb_arg_show_flights); // Build du masque
     if (number_parameter_test (liste, nb_arg_show_flights, nb_optionnal_arg_show_flights) == 0)
         return; // Test sur le nombre de paramètre
     occ_test++; // 1
