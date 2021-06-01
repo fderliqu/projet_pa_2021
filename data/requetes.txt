@@ -1,4 +1,0 @@
-show-airports HA
-show-airlines 2356
-show-airlines JFK
-show-airlines AAA
