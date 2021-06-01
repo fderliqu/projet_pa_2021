@@ -66,12 +66,14 @@ L'éxécutable sera stocké dans le dossier ` build `
 
 ## UTILISATION DU PROGRAMME
 
-Pour executer à la racine source le programme l'utilisateur a deux choix
+Pour executer à la racine ./build le programme l'utilisateur a deux choix
 
-- Soit par redirection : ` ./build/main < requetes.txt `
-- Soit sans direction : ` ./build/main `
+- Soit par redirection : ` ./main < ../data/requetes.txt `
+- Soit sans direction : ` ./main `
 
 Le programme ce ferme lorsque l'utilisateur effectue la requet ` quit ` .
+
+A noter que le programme fait automatiquement un quit dans le mode redirection
 
 Fonctions disponibles :
 
