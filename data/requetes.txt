@@ -1,0 +1,9 @@
+show-flights ATL 2-26
+show-flights SLC 4-17 1600 limit=5
+show-flights ATL 2-26 limit=5
+show-flights SLC 4-17 1600 
+find-itinerary LAX BUR 6-15 
+find-itinerary LAX BUR 6-15 limit=5
+find-itinerary LAX BUR 6-15 1040
+find-itinerary LAX BUR 6-15 1040 limit=1
+quit
