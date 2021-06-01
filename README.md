@@ -65,3 +65,24 @@ Il peut aussi taper la commande ` make clean` pour supprimier les fichiers reali
 L'éxécutable sera stocké dans le dossier ` build `
 
 ## UTILISATION DU PROGRAMME
+
+Pour executer à la racine source le programme l'utilisateur a deux choix
+
+- Soit par redirection : ` ./build/main < requetes.txt `
+- Soit sans direction : ` ./build/main `
+
+Le programme ce ferme lorsque l'utilisateur effectue la requet ` quit ` .
+
+Fonctions disponibles :
+
+- `avg-flight-duration <port_id> <port_id>`
+- `changed-flights <date>`
+- `delayed-airline <airline_id>`
+- `find-itinerary <port_id> <port_id> <date> [<time>] [limit=<xx>]`
+- `most-delayed-airlines`
+- `most-delayed-airlines-at-airport <airport_id>`
+- `most-delayed-flights`
+- `quit`
+- `show-airlines <port_id>`
+- `show-airports <airline_id>`
+- `show-flights <port_id> <date> [<time>] [limit=<xx>]`
